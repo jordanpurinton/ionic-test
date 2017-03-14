@@ -12,6 +12,7 @@ import { DatePicker } from 'ionic-native';
 export class HomePage {
   username = localStorage.getItem("username");
   nextEvent: any;
+  todayEvent: any;
   email = '';
   today: any  = new Date().toISOString();
 
@@ -22,6 +23,7 @@ export class HomePage {
     // this.username = info.name;
     // this.email = info.email;
     this.getNextEvent();
+    this.getTodayEvent();
   }
 
   ionViewDidLoad() {
@@ -76,6 +78,20 @@ export class HomePage {
       }
     );
 
+  }
+
+  getTodayEvent()
+  {
+    this.userService.getTodayEvent()
+      .subscribe(
+        data => {
+          this.todayEvent = data;
+          console.log(data);
+        },
+        err => {
+          console.error("Error: " + err)
+        }
+      );
   }
 
   selectDate()

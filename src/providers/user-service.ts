@@ -8,6 +8,12 @@ export class UserService {
   constructor(private http: Http) {
   }
 
+  getTodayEvent()
+  {
+    return this.http.get("http://localhost:56586/api/schedule-events/today-events/24533")
+      .map(response => response.json());
+  }
+
   getNextEvent()
   {
     return this.http.get("http://localhost:56586/api/schedule-events/next-event/24533")

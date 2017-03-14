@@ -14,11 +14,11 @@
 
 
 <ion-content padding>
-    <ion-item text-wrap>
-      Your next 7 days:
-      <ion-list *ngFor="let item of weekInfo">
-      <p><br>Start: {{item.EventStart}}</p>
+  <h5 text-center = "true">Your next 7 days:</h5>
+  <ion-list >
+  <ion-item text-wrap *ngFor="let item of weekInfo">
+      <p>Start: {{item.EventStart}}</p>
       <p>End: {{item.EventEnd}}</p>
-      </ion-list>
-    </ion-item>
+  </ion-item>
+  </ion-list>
 </ion-content>
