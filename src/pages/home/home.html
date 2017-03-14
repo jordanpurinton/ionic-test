@@ -12,5 +12,14 @@
 </ion-header>
 
 <ion-content class="home" padding>
-  <h5>Hello, {{username}}!</h5>
+  <!--<h5>Hello, {{username}}!</h5>-->
+  <ion-datetime displayFormat="MM DD YYYY" pickerFormat="DD MMM YYYY" [(ngModel)]="today"  ></ion-datetime>
+  <ion-item text-wrap>Today's event info:
+
+  </ion-item>
+  <ion-item text-wrap *ngFor="let item of nextEvent">
+    Your next scheduled event:
+    <p><br>Event Start: {{item.EventStart}}</p>
+    <p>Event End: {{item.EventEnd}}</p>
+  </ion-item>
 </ion-content>

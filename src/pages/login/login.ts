@@ -4,6 +4,7 @@ import { AuthService } from '../../providers/auth-service';
 import { HomePage } from '../home/home';
 import {TabsPage} from "../tabs/tabs";
 
+
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html'
@@ -11,13 +12,38 @@ import {TabsPage} from "../tabs/tabs";
 export class LoginPage {
   loading: Loading;
   registerCredentials = {username: '', password: ''};
+  tabBarElement: any;
 
-  constructor(private nav: NavController, private authService: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {}
+  constructor(private nav: NavController, private authService: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
+    this.tabBarElement = document.querySelector('#tabs ion-tabbar-section');
+  }
+
+  ionViewDidEnter()
+  {
+    let elem = <HTMLElement>document.querySelector(".tabbar");
+    if (elem != null) {
+      elem.style.display = 'none';
+    }
+  }
 
   ngOnInit()
   {
     if(localStorage.getItem('isLoggedIn') == 'true')
       this.nav.push(TabsPage);
+  }
+
+  onPageDidEnter()
+  {
+
+    this.tabBarElement.style.display = 'none';
+
+  }
+
+  onPageWillLeave()
+  {
+
+    this.tabBarElement.style.display = 'block';
+
   }
 
   public login() {

@@ -8,9 +8,15 @@ export class UserService {
   constructor(private http: Http) {
   }
 
+  getNextEvent()
+  {
+    return this.http.get("http://localhost:56586/api/schedule-events/next-event/24533")
+      .map(response => response.json());
+  }
+
   getWeekView()
   {
-    return this.http.get("http://localhost:56586/api/schedule-events/week-events/" + "24533")
+    return this.http.get("http://localhost:56586/api/schedule-events/week-events/24533")
       .map(response => response.json());
   }
 }
