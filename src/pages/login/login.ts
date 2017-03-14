@@ -24,6 +24,7 @@ export class LoginPage {
     if (elem != null) {
       elem.style.display = 'none';
     }
+    localStorage.clear();
   }
 
   ngOnInit()
