@@ -15,7 +15,7 @@ import {KeysPipe} from '../../providers/keys-pipe'
 })
 export class WeekViewPage {
   weekInfo: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private userService: UserService) {
+  constructor(public nav: NavController, public navParams: NavParams, private userService: UserService) {
     this.getWeekInfo();
   }
 
@@ -23,7 +23,11 @@ export class WeekViewPage {
     console.log('ionViewDidLoad WeekViewPage');
   }
 
-  getWeekInfo()
+  ionViewDidEnter() {
+    this.getWeekInfo();
+  }
+
+    getWeekInfo()
   {
     this.userService.getWeekView()
       .subscribe(

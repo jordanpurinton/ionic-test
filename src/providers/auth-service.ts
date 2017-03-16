@@ -3,6 +3,8 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {Http, Response, Headers, RequestOptions} from "@angular/http";
 import {secret} from '../assets/secret';
+import {LoginPage} from "../pages/login/login";
+import {NavController} from "ionic-angular";
 
 @Injectable()
 export class AuthService {
@@ -23,15 +25,5 @@ export class AuthService {
         .map((response: Response) => response.statusText);
     }
   }
-
-    // public
-    //   logout()
-    //   {
-    //     return Observable.create(observer => {
-    //       this.currentUser = null;
-    //       observer.next(true);
-    //       observer.complete();
-    //     });
-    //   }
 
 }

@@ -15,37 +15,18 @@ export class LoginPage {
   tabBarElement: any;
 
   constructor(private nav: NavController, private authService: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
-    this.tabBarElement = document.querySelector('#tabs ion-tabbar-section');
   }
 
   ionViewDidEnter()
   {
-    let elem = <HTMLElement>document.querySelector(".tabbar");
-    if (elem != null) {
-      elem.style.display = 'none';
-    }
     localStorage.clear();
   }
 
-  ngOnInit()
-  {
-    if(localStorage.getItem('isLoggedIn') == 'true')
-      this.nav.push(TabsPage);
-  }
-
-  onPageDidEnter()
-  {
-
-    this.tabBarElement.style.display = 'none';
-
-  }
-
-  onPageWillLeave()
-  {
-
-    this.tabBarElement.style.display = 'block';
-
-  }
+  // ngOnInit()
+  // {
+  //   if(localStorage.getItem('isLoggedIn') == 'true')
+  //     this.nav.push(TabsPage);
+  // }
 
   public login() {
     this.showLoading();
@@ -56,7 +37,7 @@ export class LoginPage {
         data => {
           this.loading.dismissAll();
           console.log('User logged in successfully!');
-          this.nav.push(HomePage);
+          this.nav.push(TabsPage);
           localStorage.setItem("username", this.registerCredentials.username);
           localStorage.setItem("isLoggedIn", "true");
         },

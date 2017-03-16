@@ -3,6 +3,8 @@ import {HomePage} from '../home/home';
 import {WeekViewPage} from "../week-view/week-view";
 import {ShiftRequestPage} from "../shift-request/shift-request";
 import {SettingsPage} from "../settings/settings";
+import {AlertController, NavController} from "ionic-angular";
+import {LoginPage} from "../login/login";
 
 @Component({
   selector: 'tab-page',
@@ -15,6 +17,33 @@ export class TabsPage {
   weekView: any = WeekViewPage;
   shiftRequest: any = ShiftRequestPage;
   settingsPage: any = SettingsPage;
+  constructor(private alertController: AlertController, public nav: NavController){}
 
-  constructor(){}
+  logout() {
+    // this.auth.logout().subscribe(succ => {
+    //     this.nav.setRoot(LoginPage)
+    // });
+    let logoutAlert = this.alertController.create({
+      title : 'Log Out',
+      message : 'Are you sure you want to log out?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log('No clicked');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            console.log('Yes clicked');
+            this.nav.setRoot(LoginPage);
+            localStorage.clear();
+          }
+        }
+      ]
+    });
+    logoutAlert.present();
+  }
 }

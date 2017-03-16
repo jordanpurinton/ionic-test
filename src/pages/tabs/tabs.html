@@ -1,3 +1,12 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <ion-buttons end>
+      <button ion-button (click)="logout()">
+        <ion-icon name="log-out" ></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
 <ion-tabs  id="tabs" tabsPlacement="bottom">
   <ion-tab [root]="home" tabTitle="Day View" tabIcon="calendar"></ion-tab>
   <ion-tab [root]="weekView" tabTitle="Week View" tabIcon="albums"></ion-tab>
