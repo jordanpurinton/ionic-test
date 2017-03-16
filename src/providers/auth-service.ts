@@ -17,13 +17,8 @@ export class AuthService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({headers: headers});
 
-    if (credentials.username === null || credentials.password === null) {
-      return Observable.throw("Part of the credentials were empty");
-    }
-    else {
       return this.http.post(secret.Uri + '/api/membership/authenticate', body, options)
-        .map((response: Response) => response.statusText);
-    }
+        .map((response: Response) => response.statusText, err => console.log(err));
   }
 
 }

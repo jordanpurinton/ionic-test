@@ -3,6 +3,7 @@ import { NavController, AlertController, LoadingController, Loading } from 'ioni
 import { AuthService } from '../../providers/auth-service';
 import { HomePage } from '../home/home';
 import {TabsPage} from "../tabs/tabs";
+import {UserService} from "../../providers/user-service";
 
 
 @Component({
@@ -14,7 +15,8 @@ export class LoginPage {
   registerCredentials = {username: '', password: ''};
   tabBarElement: any;
 
-  constructor(private nav: NavController, private authService: AuthService, private alertCtrl: AlertController, private loadingCtrl: LoadingController) {
+  constructor(private nav: NavController, private authService: AuthService, private alertCtrl: AlertController,
+              private loadingCtrl: LoadingController, private userService: UserService) {
   }
 
   ionViewDidEnter()
@@ -31,23 +33,40 @@ export class LoginPage {
   public login() {
     this.showLoading();
 
-    this.authService.login(this.registerCredentials)
+    this.userService.getUserIdFromUserName(this.registerCredentials.username)
       .subscribe(
-
-        data => {
-          this.loading.dismissAll();
-          console.log('User logged in successfully!');
-          this.nav.push(TabsPage);
-          localStorage.setItem("username", this.registerCredentials.username);
-          localStorage.setItem("isLoggedIn", "true");
+        res => {
+          console.log('USER ID ' + res);
+          localStorage.setItem("UserId", res.toString());
+          this.userService.getEmployeeIdFromUserId(localStorage.getItem("UserId"))
+            .subscribe(
+              res => {
+                console.log('EMPLOYEE ID ' + res);
+                localStorage.setItem("EmployeeId", res);
+                this.authService.login(this.registerCredentials)
+                  .subscribe(
+                    res => {
+                      console.log(res);
+                      this.loading.dismissAll();
+                      this.nav.push(TabsPage);
+                      localStorage.setItem("Username", this.registerCredentials.username);
+                      localStorage.setItem("isLoggedIn", "true");
+                    },
+                    error => {
+                      this.loading.dismissAll();
+                      this.showAlert("Uh oh!", "Something went wrong. Please re-enter your login credentials or check your connection.");
+                      console.log(error);
+                    });
+              },
+              err => {
+                console.log(err);
+              });
         },
-
-        error => {
-          this.loading.dismissAll();
-          this.showAlert("Uh oh!", "Something went wrong. Please re-enter your login credentials or check your connection.");
-          console.log(error);
-        });
+          err => {
+            console.log(err);
+          });
   }
+
 
   showLoading() {
     this.loading = this.loadingCtrl.create({

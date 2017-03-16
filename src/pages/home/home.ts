@@ -22,12 +22,12 @@ export class HomePage {
     // let info = this.authService.getUserInfo();
     // this.username = info.name;
     // this.email = info.email;
-    this.getNextEvent();
-    this.getTodayEvent();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
+    this.getNextEvent();
+    this.getTodayEvent();
   }
 
   getNextEvent()
