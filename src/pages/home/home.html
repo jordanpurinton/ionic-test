@@ -2,11 +2,11 @@
   Day View
 </ion-title>
 <ion-content class="home" padding>
-  <!--<h5>Hello, {{username}}!</h5>-->
-  <ion-item>
+  <ion-item text-wrap >
     <ion-label>Date</ion-label>
     <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="today"></ion-datetime>
-  </ion-item>  <h5 text-center="true"><b>TODAY'S EVENTS:</b></h5>
+  </ion-item>
+  <h5 text-center="true"><b>TODAY'S EVENTS:</b></h5>
   <ion-item text-wrap *ngFor="let item of todayEvent">
     <p>Event Start: {{item.EventStart}}</p>
       <p>Event End: {{item.EventEnd}}</p>

@@ -21,8 +21,6 @@ export class TabsPage {
   constructor(private alertController: AlertController, public nav: NavController, public userService: UserService){
   }
 
-
-
   logout() {
 
     let logoutAlert = this.alertController.create({
@@ -47,5 +45,6 @@ export class TabsPage {
       ]
     });
     logoutAlert.present();
+
   }
 }

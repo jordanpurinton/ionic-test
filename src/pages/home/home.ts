@@ -9,36 +9,36 @@ import { DatePicker } from 'ionic-native';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
 export class HomePage {
   username = localStorage.getItem("username");
   nextEvent: any;
   todayEvent: any;
   email = '';
   today: any  = new Date().toISOString();
+  hasTodayEvent: boolean = false;
 
 
   constructor(private userService: UserService) {
-    // let username = localStorage.getItem("username");
-    // let info = this.authService.getUserInfo();
-    // this.username = info.name;
-    // this.email = info.email;
+    this.getTodayEvent();
+    this.getNextEvent();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
-    this.getNextEvent();
-    this.getTodayEvent();
   }
 
   getNextEvent()
   {
+    console.log('hi');
     this.userService.getNextEvent()
       .subscribe(
       data => {
+        console.log('data');
         this.nextEvent = data;
-        console.log(data);
       },
       err => {
+        console.log('err');
         console.error("Error: " + err);
       }
     );
@@ -51,7 +51,6 @@ export class HomePage {
       .subscribe(
         data => {
           this.todayEvent = data;
-          console.log(data);
         },
         err => {
           console.error("Error: " + err)

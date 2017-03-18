@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import {UserService} from "../../providers/user-service";
 import {KeysPipe} from '../../providers/keys-pipe'
+import {GlobalFunctions} from "../../providers/global-functions";
 
 /*
   Generated class for the WeekView page.
@@ -15,7 +16,7 @@ import {KeysPipe} from '../../providers/keys-pipe'
 })
 export class WeekViewPage {
   weekInfo: any;
-  constructor(public nav: NavController, public navParams: NavParams, private userService: UserService) {
+  constructor(private nav: NavController, public navParams: NavParams, private userService: UserService, private globalFunctions: GlobalFunctions) {
     this.getWeekInfo();
   }
 
@@ -23,9 +24,6 @@ export class WeekViewPage {
     console.log('ionViewDidLoad WeekViewPage');
   }
 
-  ionViewDidEnter() {
-    this.getWeekInfo();
-  }
 
     getWeekInfo()
   {

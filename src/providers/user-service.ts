@@ -6,14 +6,14 @@ import {Observable} from 'rxjs/Rx'
 
 @Injectable()
 export class UserService {
-  userId: any = localStorage.getItem("UserId");
-  employeeId: any = localStorage.getItem("EmployeeId");
+
 
   constructor(private http: Http) {
   }
 
   getUserIdFromUserName(username)
   {
+
     return this.http.get("http://localhost:56586/api/users/get-userid/" + username)
       .map(response => response.json());
   }
@@ -26,19 +26,19 @@ export class UserService {
 
   getTodayEvent()
   {
-    return this.http.get("http://localhost:56586/api/schedule-events/today-events/" + this.employeeId)
+    return this.http.get("http://localhost:56586/api/schedule-events/today-events/" + localStorage.getItem("EmployeeId"))
       .map(response => response.json());
   }
 
   getNextEvent()
   {
-    return this.http.get("http://localhost:56586/api/schedule-events/next-event/" + this.employeeId)
+    return this.http.get("http://localhost:56586/api/schedule-events/next-event/" + localStorage.getItem("EmployeeId"))
       .map(response => response.json());
   }
 
   getWeekView()
   {
-    return this.http.get("http://localhost:56586/api/schedule-events/week-events/" + this.employeeId)
+    return this.http.get("http://localhost:56586/api/schedule-events/week-events/" + localStorage.getItem("EmployeeId"))
       .map(response => response.json());
   }
 }

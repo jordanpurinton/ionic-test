@@ -4,6 +4,7 @@ import { AuthService } from '../../providers/auth-service';
 import { HomePage } from '../home/home';
 import {TabsPage} from "../tabs/tabs";
 import {UserService} from "../../providers/user-service";
+import {GlobalFunctions} from "../../providers/global-functions";
 
 
 @Component({
@@ -11,27 +12,19 @@ import {UserService} from "../../providers/user-service";
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  loading: Loading;
   registerCredentials = {username: '', password: ''};
-  tabBarElement: any;
 
-  constructor(private nav: NavController, private authService: AuthService, private alertCtrl: AlertController,
-              private loadingCtrl: LoadingController, private userService: UserService) {
+  constructor(private nav: NavController, private authService: AuthService,
+               private userService: UserService, private globalFunctions: GlobalFunctions) {
+
   }
 
   ionViewDidEnter()
   {
-    localStorage.clear();
   }
 
-  // ngOnInit()
-  // {
-  //   if(localStorage.getItem('isLoggedIn') == 'true')
-  //     this.nav.push(TabsPage);
-  // }
-
   public login() {
-    this.showLoading();
+    this.globalFunctions.showLoading();
 
     this.userService.getUserIdFromUserName(this.registerCredentials.username)
       .subscribe(
@@ -47,40 +40,28 @@ export class LoginPage {
                   .subscribe(
                     res => {
                       console.log(res);
-                      this.loading.dismissAll();
-                      this.nav.push(TabsPage);
-                      localStorage.setItem("Username", this.registerCredentials.username);
                       localStorage.setItem("isLoggedIn", "true");
+                      localStorage.setItem("Username", this.registerCredentials.username);
+                      this.globalFunctions.loading.dismissAll();
+                      this.nav.push(TabsPage);
                     },
                     error => {
-                      this.loading.dismissAll();
-                      this.showAlert("Uh oh!", "Something went wrong. Please re-enter your login credentials or check your connection.");
+                      this.globalFunctions.loading.dismissAll();
+                      this.globalFunctions.showAlert("Uh oh!", "Something went wrong. Please re-enter your login credentials or check your connection.");
                       console.log(error);
                     });
               },
               err => {
+                this.globalFunctions.loading.dismissAll();
+                this.globalFunctions.showAlert("Uh oh!", "Something went wrong. Please re-enter your login credentials or check your connection.");
                 console.log(err);
               });
         },
           err => {
+            this.globalFunctions.loading.dismissAll();
+            this.globalFunctions.showAlert("Uh oh!", "Something went wrong. Please re-enter your login credentials or check your connection.");
             console.log(err);
           });
   }
 
-
-  showLoading() {
-    this.loading = this.loadingCtrl.create({
-      content: 'Just a sec...'
-    });
-    this.loading.present();
-  }
-
-  showAlert(title, text) {
-    let alert = this.alertCtrl.create({
-      title: title,
-      subTitle: text,
-      buttons: ['Dismiss']
-    });
-    alert.present();
-  }
 }

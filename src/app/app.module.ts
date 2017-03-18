@@ -10,7 +10,7 @@ import {SettingsPage} from '../pages/settings/settings';
 import {ShiftRequestPage} from '../pages/shift-request/shift-request';
 import {UserService} from "../providers/user-service";
 import {KeysPipe} from "../providers/keys-pipe";
-
+import {GlobalFunctions} from '../providers/global-functions';
 
 @NgModule({
   declarations: [
@@ -36,6 +36,6 @@ import {KeysPipe} from "../providers/keys-pipe";
     SettingsPage,
     ShiftRequestPage
   ],
-  providers: [AuthService, UserService, KeysPipe]
+  providers: [AuthService, UserService, KeysPipe, GlobalFunctions]
 })
 export class AppModule {}
