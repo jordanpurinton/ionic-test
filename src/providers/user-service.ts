@@ -28,9 +28,9 @@ export class UserService {
         err => console.log(err))
   }
 
-  getTodayEvent()
+  getDateEvent(dateTime)
   {
-    return this.http.get("http://localhost:56586/api/schedule-events/today-events/" + localStorage.getItem("EmployeeId"))
+    return this.http.get("http://localhost:56586/api/schedule-events/date-events/" + localStorage.getItem("EmployeeId") + "/" + encodeURIComponent(dateTime))
       .map(
         response => response.json(),
         err => console.log(err))

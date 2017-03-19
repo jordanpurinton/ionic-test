@@ -13,14 +13,14 @@ import { DatePicker } from 'ionic-native';
 export class HomePage {
   username = localStorage.getItem("username");
   nextEvent: any;
-  todayEvent: any;
+  dateEvent: any;
   email = '';
-  date: any  = new Date().toISOString();
-  hasTodayEvent: boolean = false;
+  dateTime: any  = new Date().toISOString();
+  hasEvent: boolean = true;
 
 
   constructor(private userService: UserService) {
-    this.getTodayEvent();
+    this.getDateEvent();
     this.getNextEvent();
   }
 
@@ -28,6 +28,21 @@ export class HomePage {
     console.log('ionViewDidLoad HomePage');
   }
 
+  getDateEvent()
+  {
+    this.userService.getDateEvent(this.dateTime)
+      .subscribe(
+        data => {
+          console.log(data);
+          this.dateEvent = data;
+          this.hasEvent = true;
+        },
+        err => {
+          this.hasEvent = false;
+          console.log(err);
+        }
+      )
+  }
   getNextEvent()
   {
     this.userService.getNextEvent()
@@ -36,24 +51,10 @@ export class HomePage {
         this.nextEvent = data;
       },
       err => {
-        console.log('err');
-        console.error("Error: " + err);
+        console.error(err);
       }
     );
 
-  }
-
-  getTodayEvent()
-  {
-    this.userService.getTodayEvent()
-      .subscribe(
-        data => {
-          this.todayEvent = data;
-        },
-        err => {
-          console.error("Error: " + err)
-        }
-      );
   }
 
   selectDate()

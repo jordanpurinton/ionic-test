@@ -13,7 +13,6 @@ export class AuthService {
   jwtHelper: JwtHelper = new JwtHelper();
   user: string;
   error: string;
-  hasNoEvent: boolean = false;
 
   constructor(private http: Http) {
     let token = localStorage.getItem('id_token');
@@ -36,7 +35,7 @@ export class AuthService {
         ((response: Response) =>
             response.statusText,
           err =>
-            this.hasNoEvent = true);
+            console.log(err));
   }
 
   authSuccess(token) {

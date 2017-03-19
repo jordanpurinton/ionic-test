@@ -4,15 +4,17 @@
 <ion-content class="home" padding>
   <ion-item text-wrap >
     <ion-label>Date</ion-label>
-    <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="date"></ion-datetime>
+    <ion-datetime class="orbital-datepick" displayFormat="MMM DD, YYYY" [(ngModel)]="dateTime" (ionChange)="getDateEvent()"></ion-datetime>
   </ion-item>
-  <h5 text-center="true"><b>Events for {{date | date: 'MM/dd'}}:</b></h5>
-  <ion-item text-wrap *ngFor="let item of todayEvent">
+  <h5 text-center="true"><b>Events for {{dateTime | date: 'MM/dd'}}:</b></h5>
+  <ion-item *ngIf="hasEvent">
+  <ion-item text-wrap *ngFor="let item of dateEvent">
     <p>Event Start: {{item.EventStart}}</p>
       <p>Event End: {{item.EventEnd}}</p>
     </ion-item>
-  <ion-item *ngIf="hasNoEvent">
-    <p>Whoops! Looks like you don't have any events scheduled for today!</p>
+  </ion-item>
+  <ion-item *ngIf="!hasEvent" text-wrap>
+    <p >Looks like you don't have any events on {{dateTime | date: 'MM/dd'}}!</p>
   </ion-item>
   <h6 text-center="true"><b>NEXT EVENT:</b></h6>
   <ion-item text-wrap *ngFor="let item of nextEvent">
