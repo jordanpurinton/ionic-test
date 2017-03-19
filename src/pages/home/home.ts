@@ -17,15 +17,34 @@ export class HomePage {
   email = '';
   dateTime: any  = new Date().toISOString();
   hasEvent: boolean = true;
+  hasNextEvent: boolean = true;
+  positionName: any;
 
 
   constructor(private userService: UserService) {
     this.getDateEvent();
     this.getNextEvent();
+    // this.getPositionName(localStorage.getItem("PositionId"));
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
+  }
+
+  doItAll()
+  {
+
+  }
+
+  getPositionName(positionId)
+  {
+    this.userService.getPositionName(positionId)
+      .subscribe(
+        data => {
+          console.log(data);
+          this.positionName = data;
+        }
+      );
   }
 
   getDateEvent()
@@ -35,6 +54,7 @@ export class HomePage {
         data => {
           console.log(data);
           this.dateEvent = data;
+          // localStorage.setItem("PositionId", data[0].PositionId);
           this.hasEvent = true;
         },
         err => {
@@ -49,8 +69,10 @@ export class HomePage {
       .subscribe(
       data => {
         this.nextEvent = data;
+        this.hasNextEvent = true;
       },
       err => {
+        this.hasNextEvent = false;
         console.error(err);
       }
     );

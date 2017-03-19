@@ -51,4 +51,12 @@ export class UserService {
         response => response.json(),
         err => console.log(err))
   }
+
+  getPositionName(positionId)
+  {
+    return this.http.get("http://localhost:56586/api/positions/position-name/" + positionId)
+      .map(
+        response => response.json(),
+        err => console.log(err))
+  }
 }

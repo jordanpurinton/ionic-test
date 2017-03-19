@@ -6,19 +6,26 @@
     <ion-label>Date</ion-label>
     <ion-datetime class="orbital-datepick" displayFormat="MMM DD, YYYY" [(ngModel)]="dateTime" (ionChange)="getDateEvent()"></ion-datetime>
   </ion-item>
-  <h5 text-center="true"><b>Events for {{dateTime | date: 'MM/dd'}}:</b></h5>
+  <h5 text-center="true"><b>EVENTS FOR {{dateTime | date: 'MM/dd'}}:</b></h5>
   <ion-item *ngIf="hasEvent">
   <ion-item text-wrap *ngFor="let item of dateEvent">
-    <p>Event Start: {{item.EventStart}}</p>
-      <p>Event End: {{item.EventEnd}}</p>
+    <p>Position: {{positionName}}</p>
+    <p><b>Event Start:</b> {{item.EventStart | date:'shortTime'}}</p>
+    <p><b>Event End:</b> {{item.EventEnd | date:'shortTime'}}</p>
     </ion-item>
   </ion-item>
   <ion-item *ngIf="!hasEvent" text-wrap>
-    <p >Looks like you don't have any events on {{dateTime | date: 'MM/dd'}}!</p>
+    <p >Looks like you don't have any events on {{dateTime | date: 'MM/dd/YYYY'}}!</p>
   </ion-item>
   <h6 text-center="true"><b>NEXT EVENT:</b></h6>
+  <ion-item *ngIf="hasNextEvent">
   <ion-item text-wrap *ngFor="let item of nextEvent">
-    <p>Event Start: {{item.EventStart}}</p>
-    <p>Event End: {{item.EventEnd}}</p>
+    <p><b>Date:</b> {{item.EventStart | date:'MM/dd'}}</p>
+    <p><b>Event Start:</b> {{item.EventStart}}</p>
+    <p><b>Event End:</b> {{item.EventEnd}}</p>
+    </ion-item>
   </ion-item>
+  <ion-item *ngIf="!hasNextEvent" text-wrap>
+      <p >Looks like you don't have any future events scheduled!</p>
+    </ion-item>
 </ion-content>

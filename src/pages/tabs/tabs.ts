@@ -31,13 +31,11 @@ export class TabsPage {
           text: 'No',
           role: 'cancel',
           handler: () => {
-            console.log('No clicked');
           }
         },
         {
           text: 'Yes',
           handler: () => {
-            console.log('Yes clicked');
             this.nav.setRoot(LoginPage);
             localStorage.clear();
           }

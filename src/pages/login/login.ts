@@ -38,8 +38,9 @@ export class LoginPage {
       .do(employeeId => localStorage.setItem('EmployeeId', employeeId))
       .mergeMap(res => this.authService.login(this.registerCredentials))
       .map(res => res.toString())
+
       .subscribe(
-        employeeId => {
+        res => {
           // console.log(employeeId);
           this.nav.push(TabsPage);
           this.globalFunctions.loading.dismissAll();
