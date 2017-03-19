@@ -5,6 +5,8 @@ import { HomePage } from '../home/home';
 import {TabsPage} from "../tabs/tabs";
 import {UserService} from "../../providers/user-service";
 import {GlobalFunctions} from "../../providers/global-functions";
+import {JwtHelper} from 'angular2-jwt';
+import 'rxjs/Rx';
 
 
 @Component({
@@ -13,6 +15,7 @@ import {GlobalFunctions} from "../../providers/global-functions";
 })
 export class LoginPage {
   registerCredentials = {username: '', password: ''};
+  jwtHelper: JwtHelper = new JwtHelper();
 
   constructor(private nav: NavController, private authService: AuthService,
                private userService: UserService, private globalFunctions: GlobalFunctions) {
@@ -21,47 +24,33 @@ export class LoginPage {
 
   ionViewDidEnter()
   {
+    localStorage.clear();
   }
 
   public login() {
     this.globalFunctions.showLoading();
 
     this.userService.getUserIdFromUserName(this.registerCredentials.username)
+      .map(res => res.toString())
+      .do(userId => localStorage.setItem('UserId', userId))
+      .mergeMap(userId => this.userService.getEmployeeIdFromUserId(userId))
+      .map(res => res.toString())
+      .do(employeeId => localStorage.setItem('EmployeeId', employeeId))
+      .mergeMap(res => this.authService.login(this.registerCredentials))
+      .map(res => res.toString())
       .subscribe(
-        res => {
-          console.log('USER ID ' + res);
-          localStorage.setItem("UserId", res.toString());
-          this.userService.getEmployeeIdFromUserId(localStorage.getItem("UserId"))
-            .subscribe(
-              res => {
-                console.log('EMPLOYEE ID ' + res);
-                localStorage.setItem("EmployeeId", res);
-                this.authService.login(this.registerCredentials)
-                  .subscribe(
-                    res => {
-                      console.log(res);
-                      localStorage.setItem("isLoggedIn", "true");
-                      localStorage.setItem("Username", this.registerCredentials.username);
-                      this.globalFunctions.loading.dismissAll();
-                      this.nav.push(TabsPage);
-                    },
-                    error => {
-                      this.globalFunctions.loading.dismissAll();
-                      this.globalFunctions.showAlert("Uh oh!", "Something went wrong. Please re-enter your login credentials or check your connection.");
-                      console.log(error);
-                    });
-              },
-              err => {
-                this.globalFunctions.loading.dismissAll();
-                this.globalFunctions.showAlert("Uh oh!", "Something went wrong. Please re-enter your login credentials or check your connection.");
-                console.log(err);
-              });
+        employeeId => {
+          // console.log(employeeId);
+          this.nav.push(TabsPage);
+          this.globalFunctions.loading.dismissAll();
         },
-          err => {
-            this.globalFunctions.loading.dismissAll();
-            this.globalFunctions.showAlert("Uh oh!", "Something went wrong. Please re-enter your login credentials or check your connection.");
-            console.log(err);
-          });
+        err => {
+          this.globalFunctions.loading.dismissAll();
+          this.globalFunctions.showAlert("Uh oh!", "Something went wrong. Please re-enter your" +
+            " credentials or check your connection.");
+          console.log(err);
+        }
+      )
   }
 
 }

@@ -15,7 +15,7 @@ export class HomePage {
   nextEvent: any;
   todayEvent: any;
   email = '';
-  today: any  = new Date().toISOString();
+  date: any  = new Date().toISOString();
   hasTodayEvent: boolean = false;
 
 
@@ -30,11 +30,9 @@ export class HomePage {
 
   getNextEvent()
   {
-    console.log('hi');
     this.userService.getNextEvent()
       .subscribe(
       data => {
-        console.log('data');
         this.nextEvent = data;
       },
       err => {
