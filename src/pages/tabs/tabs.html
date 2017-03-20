@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar hideBackButton="true">
     <ion-buttons end>
-      <button ion-button style="zoom: 200%; color: white" (click)="logout()">
+      <button ion-button style="zoom: 150%; color: white" (click)="logout()">
         <ion-icon name="log-out" ></ion-icon>
       </button>
     </ion-buttons>
@@ -11,7 +11,7 @@
 <ion-tabs  id="tabs" tabsPlacement="bottom">
   <ion-tab [root]="home" tabTitle="Day View" tabIcon="calendar"></ion-tab>
   <ion-tab [root]="weekView" tabTitle="Week View" tabIcon="albums"></ion-tab>
-  <ion-tab [root]="shiftRequest" tabTitle="Shift Request" tabIcon="clock"></ion-tab>
+  <ion-tab [root]="coverRequestPage" tabTitle="Cover Request" tabIcon="clock"></ion-tab>
   <ion-tab [root]="settingsPage" tabTitle="Settings" tabIcon="settings"></ion-tab>
 </ion-tabs>
 </ion-content>

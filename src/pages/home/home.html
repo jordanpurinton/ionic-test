@@ -2,19 +2,26 @@
   Day View
 </ion-title>
 <ion-content class="home" padding>
+  <ion-row style="text-align: center">
+    <ion-col>
+      <h6 style="font-weight: 200">WORK SCHEDULE FOR:</h6>
+    </ion-col>
+  </ion-row>
   <ion-row>
     <ion-col style="text-align: center">
-    <button style="background-color: #9B3705" ion-button full round>
-      <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="dateTime"
-                    (ionChange)="getDateEvent()"></ion-datetime>
-    </button>
+      <button style="background-color: #9B3705" ion-button full round>
+        <u>
+          <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="dateTime"
+                        (ionChange)="getDateEvent()"></ion-datetime>
+        </u>
+        <ion-icon name="arrow-dropright" end></ion-icon>
+      </button>
     </ion-col>
   </ion-row>
   <ion-grid>
     <br>
-    <h5 text-center="true" style="font-weight: 200">WORK SCHEDULE FOR <b>{{dateTime | date: 'MM/dd/yy'}}:</b></h5>
     <ion-item *ngIf="hasEvent">
-      <ion-item text-wrap *ngFor="let item of dateEvent">
+      <ion-item text-wrap *ngFor="let item of dateEvent" no-lines="true">
         <ion-row>
           <ion-col col-6>
             <!--<p>Position: {{positionName}}</p>-->
@@ -36,7 +43,7 @@
     <br>
     <h6 text-center="true" style="font-weight: 200">NEXT EVENT:</h6>
     <ion-item *ngIf="hasNextEvent">
-      <ion-item text-wrap *ngFor="let item of nextEvent">
+      <ion-item text-wrap *ngFor="let item of nextEvent" no-lines="true">
         <ion-row>
           <ion-col col-6>
             <p><b>Date:</b> {{item.EventStart | date:'MM/dd'}}</p>
@@ -44,7 +51,8 @@
             <p><b>End:</b> {{item.EventEnd | date: 'shortTime'}}</p>
           </ion-col>
           <ion-col col-6>
-            <p><b>Notes:</b> {{item.Notes}}</p>
+            <p *ngIf="hasNextNotes"><b>Notes:</b> {{item.Notes}}</p>
+            <p *ngIf="!hasNextNotes"><b>Notes:</b> (None)</p>
           </ion-col>
         </ion-row>
         <br>

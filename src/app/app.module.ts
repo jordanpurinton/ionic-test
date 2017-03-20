@@ -24,7 +24,13 @@ import {GlobalFunctions} from '../providers/global-functions';
     KeysPipe
   ],
   imports: [
-    IonicModule.forRoot(OrbitalShiftApp),
+    IonicModule.forRoot(OrbitalShiftApp, {
+      platforms: {
+        ios: {
+          statusbarPadding: true,
+        }
+      }
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

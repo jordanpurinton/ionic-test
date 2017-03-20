@@ -19,6 +19,7 @@ export class HomePage {
   hasEvent: boolean = true;
   hasNextEvent: boolean = true;
   hasNotes: boolean = false;
+  hasNextNotes: boolean = false;
   positionName: any;
 
 
@@ -53,15 +54,14 @@ export class HomePage {
           this.dateEvent = data;
           // localStorage.setItem("PositionId", data[0].PositionId);
           this.hasEvent = true;
+
           if(data[0].Notes != "")
           {
             this.hasNotes = true;
-            console.log(data.Notes);
           }
           else
           {
             this.hasNotes = false;
-            console.log('meme')
           }
         },
         err => {
@@ -77,6 +77,15 @@ export class HomePage {
       data => {
         this.nextEvent = data;
         this.hasNextEvent = true;
+
+        if(data[0].Notes != "")
+        {
+          this.hasNextNotes = true;
+        }
+        else
+        {
+          this.hasNextNotes = false;
+        }
       },
       err => {
         this.hasNextEvent = false;

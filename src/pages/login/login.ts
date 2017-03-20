@@ -45,6 +45,7 @@ export class LoginPage {
       .subscribe(
         res => {
           // console.log(employeeId);
+          localStorage.setItem("Username", this.registerCredentials.username);
           this.nav.push(TabsPage);
           this.globalFunctions.loading.dismissAll();
         },
