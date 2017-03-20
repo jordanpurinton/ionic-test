@@ -15,10 +15,7 @@ export class AuthService {
   error: string;
 
   constructor(private http: Http) {
-    let token = localStorage.getItem('id_token');
-    if (token) {
-      this.user = this.jwtHelper.decodeToken(token).username;
-    }
+
   }
 
   public authenticated() {
@@ -31,17 +28,11 @@ export class AuthService {
     let options = new RequestOptions({headers: headers});
 
       return this.http.post(secret.Uri + '/api/membership/authenticate', body, options)
-        .map
-        ((response: Response) =>
-            response.statusText,
+        .map(
+        response =>
+          console.log(response.statusText),
           err =>
             console.log(err));
-  }
-
-  authSuccess(token) {
-    this.error = null;
-    localStorage.setItem('id_token', token);
-    this.user = this.jwtHelper.decodeToken(token).username;
   }
 
 }

@@ -16,6 +16,8 @@ import {GlobalFunctions} from "../../providers/global-functions";
 })
 export class WeekViewPage {
   weekInfo: any;
+  hasWeekEvents: boolean = true;
+
   constructor(private nav: NavController, public navParams: NavParams, private userService: UserService, private globalFunctions: GlobalFunctions) {
     this.getWeekInfo();
   }
@@ -31,9 +33,11 @@ export class WeekViewPage {
       .subscribe(
       data => {
         this.weekInfo = data;
+        this.hasWeekEvents = true;
         console.log(data);
       },
       err => {
+        this.hasWeekEvents = false;
         console.error("Error: " + err);
       }
     );

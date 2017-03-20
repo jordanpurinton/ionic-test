@@ -52,6 +52,11 @@ export class UserService {
         err => console.log(err))
   }
 
+  getFirstName(name)
+  {
+    return this.http.get("http://localhost:56586/api/employee/get-name/" + name);
+  }
+
   getPositionName(positionId)
   {
     return this.http.get("http://localhost:56586/api/positions/position-name/" + positionId)

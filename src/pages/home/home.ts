@@ -18,6 +18,7 @@ export class HomePage {
   dateTime: any  = new Date().toISOString();
   hasEvent: boolean = true;
   hasNextEvent: boolean = true;
+  hasNotes: boolean = false;
   positionName: any;
 
 
@@ -31,10 +32,6 @@ export class HomePage {
     console.log('ionViewDidLoad HomePage');
   }
 
-  doItAll()
-  {
-
-  }
 
   getPositionName(positionId)
   {
@@ -56,6 +53,16 @@ export class HomePage {
           this.dateEvent = data;
           // localStorage.setItem("PositionId", data[0].PositionId);
           this.hasEvent = true;
+          if(data[0].Notes != "")
+          {
+            this.hasNotes = true;
+            console.log(data.Notes);
+          }
+          else
+          {
+            this.hasNotes = false;
+            console.log('meme')
+          }
         },
         err => {
           this.hasEvent = false;

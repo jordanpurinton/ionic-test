@@ -16,6 +16,9 @@ import 'rxjs/Rx';
 export class LoginPage {
   registerCredentials = {username: '', password: ''};
   jwtHelper: JwtHelper = new JwtHelper();
+  user: string;
+  error: string;
+
 
   constructor(private nav: NavController, private authService: AuthService,
                private userService: UserService, private globalFunctions: GlobalFunctions) {
@@ -37,7 +40,7 @@ export class LoginPage {
       .map(res => res.toString())
       .do(employeeId => localStorage.setItem('EmployeeId', employeeId))
       .mergeMap(res => this.authService.login(this.registerCredentials))
-      .map(res => res.toString())
+      .map(res => console.log(res))
 
       .subscribe(
         res => {
@@ -53,5 +56,6 @@ export class LoginPage {
         }
       )
   }
+
 
 }
