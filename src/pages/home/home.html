@@ -23,15 +23,12 @@
     <ion-item *ngIf="hasEvent">
       <ion-item text-wrap *ngFor="let item of dateEvent" no-lines="true">
         <ion-row>
-          <ion-col col-5>
-            <p><b>{{positionName}}</b></p>
-          </ion-col>
           <ion-col text-wrap col-5>
-            <p *ngIf="item.EventTypeId == 1"><b>Type:</b><span style="color: #9CBA6A"> Shift</span></p>
-            <p *ngIf="item.EventTypeId == 2"><b>Type:</b> Unavailable</p>
-            <p *ngIf="item.EventTypeId == 3"><b>Type:</b><span style="color: #FFAD00"> Vacation</span></p>
-            <p *ngIf="item.EventTypeId == 4"><b>Type:</b><span style="color: #C41A26"> Cover</span></p>
-            <p *ngIf="item.EventTypeId == 7"><b>Type:</b> <span style="color: #FFAD00"> Absent</span></p>
+            <p *ngIf="item.EventTypeId == 1"><span style="color: #9CBA6A"> Shift</span></p>
+            <p *ngIf="item.EventTypeId == 2">Unavailable</p>
+            <p *ngIf="item.EventTypeId == 3"><span style="color: #FFAD00">Vacation</span></p>
+            <p *ngIf="item.EventTypeId == 4"><span style="color: #C41A26">Cover</span></p>
+            <p *ngIf="item.EventTypeId == 7"><span style="color: #FFAD00">Absent</span></p>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -41,7 +38,7 @@
             <p><b>End:</b> {{item.EventEnd | date:'shortTime'}}</p>
           </ion-col>
           <ion-col col-5>
-
+            <p><b>{{positionName}}</b></p>
             <p *ngIf="item.Notes != ''"><b>Notes:</b> {{item.Notes}}</p>
             <p *ngIf="item.Notes == ''"><b>Notes:</b> (None)</p>
           </ion-col>
@@ -67,7 +64,11 @@
         <h6 text-center="true" style="font-weight: 200"><b>{{item.EventStart | date:'MM/dd'}}</b></h6>
         <ion-row>
           <ion-col>
-            <p><b>{{positionName}}</b></p>
+            <p *ngIf="item.EventTypeId == 1"><span style="color: #9CBA6A">Shift</span></p>
+            <p *ngIf="item.EventTypeId == 2">Unavailable</p>
+            <p *ngIf="item.EventTypeId == 3"><span style="color: #FFAD00">Vacation</span></p>
+            <p *ngIf="item.EventTypeId == 4"><span style="color: #C41A26">Cover</span></p>
+            <p *ngIf="item.EventTypeId == 7"><span style="color: #FFAD00">Absent</span></p>
           </ion-col>
         </ion-row>
         <ion-row>
@@ -76,11 +77,7 @@
             <p><b>End:</b> {{item.EventEnd | date: 'shortTime'}}</p>
           </ion-col>
           <ion-col col-5>
-            <p *ngIf="item.EventTypeId == 1"><b>Type:</b><span style="color: #9CBA6A"> Shift</span></p>
-            <p *ngIf="item.EventTypeId == 2"><b>Type:</b> Unavailable</p>
-            <p *ngIf="item.EventTypeId == 3"><b>Type:</b><span style="color: #FFAD00"> Vacation</span></p>
-            <p *ngIf="item.EventTypeId == 4"><b>Type:</b><span style="color: #C41A26"> Cover</span></p>
-            <p *ngIf="item.EventTypeId == 7"><b>Type:</b> <span style="color: #FFAD00"> Absent</span></p>
+            <p><b>{{positionName}}</b></p>
             <p *ngIf="item.Notes != ''"><b>Notes:</b> {{item.Notes}}</p>
             <p *ngIf="item.Notes == ''"><b>Notes:</b> (None)</p>
           </ion-col>

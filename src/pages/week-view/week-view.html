@@ -17,14 +17,13 @@
       <ion-item text-wrap *ngFor="let item of weekInfo">
         <ion-row style="border: 1px; border-color: gainsboro">
           <ion-col col-4>
-            <h1 style="color: #993300; font-weight: 100">{{item.EventStart | date:'MM/dd'}}</h1>
-          </ion-col>
+            <h1 style="color: #993300; font-weight: 100"><b>{{item.EventStart | date:'MM/dd'}}</b></h1>
+            <p *ngIf="item.EventTypeId == 1"><span style="color: #9CBA6A">Shift</span></p>
+            <p *ngIf="item.EventTypeId == 2">Unavailable</p>
+            <p *ngIf="item.EventTypeId == 3"><span style="color: #FFAD00">Vacation</span></p>
+            <p *ngIf="item.EventTypeId == 4"><span style="color: #C41A26"> Cover</span></p>
+            <p *ngIf="item.EventTypeId == 7"><span style="color: #FFAD00">Absent</span></p>          </ion-col>
           <ion-col col-6>
-            <p *ngIf="item.EventTypeId == 1"><b>Type:</b><span style="color: #9CBA6A"> Shift</span></p>
-            <p *ngIf="item.EventTypeId == 2"><b>Type:</b> Unavailable</p>
-            <p *ngIf="item.EventTypeId == 3"><b>Type:</b><span style="color: #FFAD00"> Vacation</span></p>
-            <p *ngIf="item.EventTypeId == 4"><b>Type:</b><span style="color: #C41A26"> Cover</span></p>
-            <p *ngIf="item.EventTypeId == 7"><b>Type:</b> <span style="color: #FFAD00"> Absent</span></p>
             <p><b>Start:</b> {{item.EventStart | date: 'shortTime'}}</p>
             <p><b>End:</b> {{item.EventEnd | date: 'shortTime'}}</p>
           </ion-col>
