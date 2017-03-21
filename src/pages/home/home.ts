@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import {NavController, AlertController} from 'ionic-angular';
+import {NavController, AlertController, ModalController} from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import { LoginPage } from '../login/login';
 import {UserService} from "../../providers/user-service";
 import { DatePicker } from 'ionic-native';
+import {EventModalPage} from "../event-modal/event-modal";
 
 @Component({
   selector: 'page-home',
@@ -23,7 +24,7 @@ export class HomePage {
 
 
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, public modalControl: ModalController) {
     this.getDateEvent();
     this.getNextEvent();
   }
@@ -88,4 +89,10 @@ export class HomePage {
       err => console.log('Error occurred while getting date: ', err)
     );
   }
+
+  showEventModal() {
+    let eventModal = this.modalControl.create(EventModalPage);
+    eventModal.present();
+  }
+
 }
