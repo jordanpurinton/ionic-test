@@ -8,15 +8,15 @@ import { NavController, NavParams } from 'ionic-angular';
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-cover-request',
-  templateUrl: 'cover-request.html'
+  selector: 'page-shift-request',
+  templateUrl: 'shift-request.html'
 })
-export class CoverRequestPage {
+export class ShiftRequestPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CoverRequestPage');
+    console.log('ionViewDidLoad ShiftRequestPage');
   }
 
 }

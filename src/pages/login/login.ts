@@ -40,7 +40,7 @@ export class LoginPage {
       .map(res => res.toString())
       .do(employeeId => localStorage.setItem('EmployeeId', employeeId))
       .mergeMap(res => this.authService.login(this.registerCredentials))
-      .map(res => console.log(res))
+      .map(res => res)
 
       .subscribe(
         res => {

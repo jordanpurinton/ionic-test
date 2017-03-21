@@ -23,7 +23,7 @@ var ShiftRequestPage = (function () {
     ShiftRequestPage = __decorate([
         core_1.Component({
             selector: 'page-shift-request',
-            templateUrl: 'cover-request.html'
+            templateUrl: 'shift-request.html'
         })
     ], ShiftRequestPage);
     return ShiftRequestPage;

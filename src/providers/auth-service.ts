@@ -30,7 +30,7 @@ export class AuthService {
       return this.http.post(secret.Uri + '/api/membership/authenticate', body, options)
         .map(
         response =>
-          console.log(response.statusText),
+          console.log('Authentication successful'),
           err =>
             console.log(err));
   }

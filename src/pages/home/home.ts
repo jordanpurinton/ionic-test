@@ -15,32 +15,30 @@ export class HomePage {
   nextEvent: any;
   dateEvent: any;
   email = '';
+  eventTypeId: any;
   dateTime: any  = new Date().toISOString();
   hasEvent: boolean = true;
   hasNextEvent: boolean = true;
-  hasNotes: boolean = false;
-  hasNextNotes: boolean = false;
   positionName: any;
+
 
 
   constructor(private userService: UserService) {
     this.getDateEvent();
     this.getNextEvent();
-    // this.getPositionName(localStorage.getItem("PositionId"));
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
   }
 
-
   getPositionName(positionId)
   {
     this.userService.getPositionName(positionId)
       .subscribe(
         data => {
-          console.log(data);
           this.positionName = data;
+          // console.log(data);
         }
       );
   }
@@ -50,19 +48,13 @@ export class HomePage {
     this.userService.getDateEvent(this.dateTime)
       .subscribe(
         data => {
-          console.log(data);
+          // console.log(data);
           this.dateEvent = data;
-          // localStorage.setItem("PositionId", data[0].PositionId);
           this.hasEvent = true;
+          localStorage.setItem('PositionId', data[0].PositionId);
+          this.getPositionName(localStorage.getItem("PositionId"));
+          this.eventTypeId = data[0].EventTypeId;
 
-          if(data[0].Notes != "")
-          {
-            this.hasNotes = true;
-          }
-          else
-          {
-            this.hasNotes = false;
-          }
         },
         err => {
           this.hasEvent = false;
@@ -77,15 +69,6 @@ export class HomePage {
       data => {
         this.nextEvent = data;
         this.hasNextEvent = true;
-
-        if(data[0].Notes != "")
-        {
-          this.hasNextNotes = true;
-        }
-        else
-        {
-          this.hasNextNotes = false;
-        }
       },
       err => {
         this.hasNextEvent = false;

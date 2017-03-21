@@ -7,7 +7,7 @@ import { AuthService } from '../providers/auth-service';
 import {TabsPage} from "../pages/tabs/tabs";
 import {WeekViewPage} from '../pages/week-view/week-view';
 import {SettingsPage} from '../pages/settings/settings';
-import {CoverRequestPage} from '../pages/cover-request/cover-request';
+import {ShiftRequestPage} from '../pages/shift-request/shift-request';
 import {UserService} from "../providers/user-service";
 import {KeysPipe} from "../providers/keys-pipe";
 import {GlobalFunctions} from '../providers/global-functions';
@@ -20,7 +20,7 @@ import {GlobalFunctions} from '../providers/global-functions';
     TabsPage,
     WeekViewPage,
     SettingsPage,
-    CoverRequestPage,
+    ShiftRequestPage,
     KeysPipe
   ],
   imports: [
@@ -40,7 +40,7 @@ import {GlobalFunctions} from '../providers/global-functions';
     TabsPage,
     WeekViewPage,
     SettingsPage,
-    CoverRequestPage
+    ShiftRequestPage
   ],
   providers: [AuthService, UserService, KeysPipe, GlobalFunctions]
 })

@@ -17,6 +17,7 @@ import {GlobalFunctions} from "../../providers/global-functions";
 export class WeekViewPage {
   weekInfo: any;
   hasWeekEvents: boolean = true;
+  eventTypeIdArray: Array<number> = [];
 
   constructor(private nav: NavController, public navParams: NavParams, private userService: UserService, private globalFunctions: GlobalFunctions) {
     this.getWeekInfo();
@@ -27,14 +28,17 @@ export class WeekViewPage {
   }
 
 
-    getWeekInfo()
+  getWeekInfo()
   {
     this.userService.getWeekView()
       .subscribe(
       data => {
         this.weekInfo = data;
         this.hasWeekEvents = true;
-        console.log(data);
+        for(let i = 0; i < data.length; i++)
+        {
+          this.eventTypeIdArray[i] = data[i].EventTypeId;
+        }
       },
       err => {
         this.hasWeekEvents = false;

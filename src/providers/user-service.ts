@@ -3,7 +3,6 @@ import {Http} from "@angular/http";
 import {Observable} from 'rxjs/Rx'
 
 
-
 @Injectable()
 export class UserService {
 
@@ -11,54 +10,51 @@ export class UserService {
   constructor(private http: Http) {
   }
 
-  getUserIdFromUserName(username)
-  {
+  getUserIdFromUserName(username) {
 
     return this.http.get("http://localhost:56586/api/users/get-userid/" + username)
       .map(
         response => response.json(),
-      err => console.log(err))
+        err => console.log(err))
   }
 
-  getEmployeeIdFromUserId(userId)
-  {
+  getEmployeeIdFromUserId(userId) {
     return this.http.get("http://localhost:56586/api/employee/get-id/" + userId)
       .map(
         response => response.json(),
         err => console.log(err))
   }
 
-  getDateEvent(dateTime)
-  {
+  getDateEvent(dateTime) {
     return this.http.get("http://localhost:56586/api/schedule-events/date-events/" + localStorage.getItem("EmployeeId") + "/" + encodeURIComponent(dateTime))
       .map(
         response => response.json(),
         err => console.log(err))
   }
 
-  getNextEvent()
-  {
+  getNextEvent() {
     return this.http.get("http://localhost:56586/api/schedule-events/next-event/" + localStorage.getItem("EmployeeId"))
       .map(
         response => response.json(),
         err => console.log(err))
   }
 
-  getWeekView()
-  {
+  getWeekView() {
     return this.http.get("http://localhost:56586/api/schedule-events/week-events/" + localStorage.getItem("EmployeeId"))
       .map(
         response => response.json(),
         err => console.log(err))
   }
 
-  getFirstName(name)
-  {
-    return this.http.get("http://localhost:56586/api/employee/get-name/" + name);
+  getFirstName(name) {
+    return this.http.get("http://localhost:56586/api/employee/get-name/" + name)
+      .map(
+        response => console.log(response),
+        err => console.log(err))
   }
 
-  getPositionName(positionId)
-  {
+
+  getPositionName(positionId) {
     return this.http.get("http://localhost:56586/api/positions/position-name/" + positionId)
       .map(
         response => response.json(),
