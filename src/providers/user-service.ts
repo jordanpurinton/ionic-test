@@ -10,6 +10,8 @@ export class UserService {
   constructor(private http: Http) {
   }
 
+  //TODO come back and encode
+
   getUserIdFromUserName(username) {
 
     return this.http.get("http://localhost:56586/api/users/get-userid/" + username)

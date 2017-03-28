@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams, ModalController} from 'ionic-angular';
 import {UserService} from "../../providers/user-service";
 import {KeysPipe} from '../../providers/keys-pipe'
 import {GlobalFunctions} from "../../providers/global-functions";
+import {EventModalPage} from "../event-modal/event-modal";
 
 /*
   Generated class for the WeekView page.
@@ -19,14 +20,13 @@ export class WeekViewPage {
   hasWeekEvents: boolean = true;
   eventTypeIdArray: Array<number> = [];
 
-  constructor(private nav: NavController, public navParams: NavParams, private userService: UserService, private globalFunctions: GlobalFunctions) {
+  constructor(private nav: NavController, public navParams: NavParams, private userService: UserService, private globalFunctions: GlobalFunctions, private modalControl: ModalController) {
     this.getWeekInfo();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WeekViewPage');
   }
-
 
   getWeekInfo()
   {
@@ -45,6 +45,11 @@ export class WeekViewPage {
         console.error("Error: " + err);
       }
     );
+  }
+
+  showEventModal(date) {
+    let eventModal = this.modalControl.create(EventModalPage, {modalDate: date});
+    eventModal.present();
   }
 
 }

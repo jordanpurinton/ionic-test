@@ -4,7 +4,7 @@
 <ion-content class="home" padding>
   <ion-row style="text-align: center">
     <ion-col>
-      <h6 style="font-weight: 200">EVENTS FOR:</h6>
+      <h6 style="font-weight: 200">EVENT(S) FOR:</h6>
     </ion-col>
   </ion-row>
   <ion-row>
@@ -27,31 +27,31 @@
             <p *ngIf="item.EventTypeId == 1"><b><span style="color: #9CBA6A">Shift</span></b>
               <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
               <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4" style="float: right">(Request Denied)</span>
+              <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
             </p>
 
             <p *ngIf="item.EventTypeId == 2"><b>Unavailable</b>
               <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
               <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4" style="float: right">(Request Denied)</span>
+              <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
             </p>
 
             <p *ngIf="item.EventTypeId == 3"><b><span style="color: #FFAD00">Vacation</span></b>
               <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
-              <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">(Request</span>
-              <span *ngIf="item.EventStatusId == 4" style="float: right">(Request Denied)</span>
+              <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
+              <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
             </p>
 
             <p *ngIf="item.EventTypeId == 4"><b><span style="color: #C41A26">Cover</span></b>
               <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
               <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4" style="float: right">(Request Denied)</span>
+              <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
             </p>
 
             <p *ngIf="item.EventTypeId == 7"><b><span style="color: #FFAD00">Absent</span></b>
               <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
               <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4" style="float: right">(Request Denied)</span>
+              <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
             </p>
           </ion-col>
         </ion-row>
@@ -68,7 +68,7 @@
           </ion-col>
           <ion-col col-2>
             <ion-buttons>
-              <button ion-button clear="true">
+              <button ion-button clear="true" (click)="showEventModal(item.EventStart)">
                 <ion-icon name="arrow-dropright-circle" end style="zoom: 130%"></ion-icon>
               </button>
             </ion-buttons>
@@ -91,31 +91,31 @@
             <p *ngIf="item.EventTypeId == 1"><b><span style="color: #9CBA6A">Shift</span></b>
               <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
               <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4" style="float: right">(Request Denied)</span>
+              <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
             </p>
 
             <p *ngIf="item.EventTypeId == 2"><b>Unavailable</b>
               <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
               <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4" style="float: right">(Request Denied)</span>
+              <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
             </p>
 
             <p *ngIf="item.EventTypeId == 3"><b><span style="color: #FFAD00">Vacation</span></b>
               <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
-              <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">(Request</span>
-              <span *ngIf="item.EventStatusId == 4" style="float: right">(Request Denied)</span>
+              <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
+              <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
             </p>
 
             <p *ngIf="item.EventTypeId == 4"><b><span style="color: #C41A26">Cover</span></b>
               <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
               <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4" style="float: right">(Request Denied)</span>
+              <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
             </p>
 
             <p *ngIf="item.EventTypeId == 7"><b><span style="color: #FFAD00">Absent</span></b>
               <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
               <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4" style="float: right">(Request Denied)</span>
+              <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
             </p>
           </ion-col>
         </ion-row>
@@ -131,7 +131,7 @@
           </ion-col>
           <ion-col col-2>
             <ion-buttons>
-              <button ion-button clear="true">
+              <button ion-button clear="true" (click)="showEventModal(item.EventStart)">
                 <ion-icon name="arrow-dropright-circle" end style="zoom: 130%"></ion-icon>
               </button>
             </ion-buttons>

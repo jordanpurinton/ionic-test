@@ -90,8 +90,8 @@ export class HomePage {
     );
   }
 
-  showEventModal() {
-    let eventModal = this.modalControl.create(EventModalPage);
+  showEventModal(date) {
+    let eventModal = this.modalControl.create(EventModalPage, {modalDate: date});
     eventModal.present();
   }
 
