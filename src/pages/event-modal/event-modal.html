@@ -14,6 +14,7 @@
   <ion-item text-wrap *ngFor="let item of dateEvent" no-lines="true">
     <ion-row id="modal-grid">
       <ion-col text-wrap>
+        <ion-row></ion-row>
         <h1 style="color: #993300; font-weight: 100"><b>{{item.EventStart | date:'MM/dd'}}</b></h1>
         <p *ngIf="item.EventTypeId == 1"><b><span style="color: #9CBA6A">SHIFT</span></b>
           <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
@@ -73,5 +74,6 @@
       </ion-col>
     </ion-row>
     <br>
+    <button *ngIf="item.EventTypeId == 1" ion-button color="danger" (click)="onCoverRequestClick()">Request Cover</button>
   </ion-item>
 </ion-content>

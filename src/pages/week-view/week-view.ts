@@ -18,6 +18,7 @@ import {EventModalPage} from "../event-modal/event-modal";
 export class WeekViewPage {
   weekInfo: any;
   hasWeekEvents: boolean = true;
+  coverRequestClicked: boolean = false;
   eventTypeIdArray: Array<number> = [];
 
   constructor(private nav: NavController, public navParams: NavParams, private userService: UserService, private globalFunctions: GlobalFunctions, private modalControl: ModalController) {
