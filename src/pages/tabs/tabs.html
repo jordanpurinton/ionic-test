@@ -5,16 +5,16 @@
     </ion-title>
     <ion-buttons end>
       <button ion-button style="zoom: 150%; color: white" (click)="logout()">
-        <ion-icon name="log-out" ></ion-icon>
+        <ion-icon name="log-out"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
 <ion-content class="no-scroll" overflow-scroll=”false”>
-<ion-tabs  id="tabs">
-  <ion-tab [root]="home" tabTitle="Day View" tabIcon="calendar"></ion-tab>
-  <ion-tab [root]="weekView" tabTitle="Week View" tabIcon="albums"></ion-tab>
-  <ion-tab [root]="shiftRequestPage" tabTitle="Shift Request" tabIcon="clock"></ion-tab>
-  <ion-tab [root]="settingsPage" tabTitle="Settings" tabIcon="settings"></ion-tab>
-</ion-tabs>
+  <ion-tabs>
+    <ion-tab [root]="home" tabTitle="Day View" tabIcon="calendar"></ion-tab>
+    <ion-tab [root]="weekView" tabTitle="Week View" tabIcon="albums"></ion-tab>
+    <ion-tab [root]="shiftRequestPage" tabTitle="Shift Request" tabIcon="clock"></ion-tab>
+    <ion-tab [root]="settingsPage" tabTitle="Settings" tabIcon="settings"></ion-tab>
+  </ion-tabs>
 </ion-content>

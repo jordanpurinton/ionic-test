@@ -18,37 +18,42 @@
         <ion-row style="border: 1px; border-color: gainsboro">
           <ion-col col-4>
             <h1 style="color: #993300; font-weight: 100"><b>{{item.EventStart | date:'MM/dd'}}</b></h1>
-            <p *ngIf="item.EventTypeId == 1"><b><span style="color: #9CBA6A">Shift</span></b>
+            <p *ngIf="item.EventTypeId == 1"><b><span style="color: #9CBA6A">SHIFT</span></b>
               <span *ngIf="item.EventStatusId == 1" style="color: #9CBA6A">Approved</span>
               <span *ngIf="item.EventStatusId == 2" style="color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4">(Request Denied)</span>
+              <span *ngIf="item.EventStatusId == 4">Request Denied</span>
             </p>
 
-            <p *ngIf="item.EventTypeId == 2"><b>Unavailable</b>
+            <p *ngIf="item.EventTypeId == 2"><b><span style="zoom: 80%">UNAVAILABLE</span></b>
               <span *ngIf="item.EventStatusId == 1" style="color: #9CBA6A">Approved</span>
               <span *ngIf="item.EventStatusId == 2" style="color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4">(Request Denied)</span>
+              <span *ngIf="item.EventStatusId == 4">Request Denied</span>
             </p>
 
-            <p *ngIf="item.EventTypeId == 3"><b><span style="color: #FFAD00">Vacation</span></b>
+            <p *ngIf="item.EventTypeId == 3"><b><span style="color: #FFAD00">VACATION</span></b>
               <span *ngIf="item.EventStatusId == 1" style="color: #9CBA6A">Approved</span>
               <span *ngIf="item.EventStatusId == 2" style="color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4">(Request Denied)</span>
+              <span *ngIf="item.EventStatusId == 4">Request Denied</span>
             </p>
 
-            <p *ngIf="item.EventTypeId == 4"><b><span style="color: #C41A26">Cover</span></b>
+            <p *ngIf="item.EventTypeId == 4"><b><span style="color: #C41A26">COVER</span></b>
               <span *ngIf="item.EventStatusId == 1" style="color: #9CBA6A">Approved</span>
               <span *ngIf="item.EventStatusId == 2" style="color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4">(Request Denied)</span>
+              <span *ngIf="item.EventStatusId == 4">Request Denied</span>
             </p>
 
-            <p *ngIf="item.EventTypeId == 7"><b><span style="color: #FFAD00">Absent</span></b>
+            <p *ngIf="item.EventTypeId == 6"><b><span style="color: #677A46">CLOCK</span></b>
               <span *ngIf="item.EventStatusId == 1" style="color: #9CBA6A">Approved</span>
               <span *ngIf="item.EventStatusId == 2" style="color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4">(Request Denied)</span>
+              <span *ngIf="item.EventStatusId == 4">Request Denied</span>
+            </p>
+
+            <p *ngIf="item.EventTypeId == 7"><b><span style="color: #FFAD00">ABSENT</span></b>
+              <span *ngIf="item.EventStatusId == 1" style="color: #9CBA6A">Approved</span>
+              <span *ngIf="item.EventStatusId == 2" style="color: #C41A26">Request</span>
+              <span *ngIf="item.EventStatusId == 4">Request Denied</span>
             </p>
           </ion-col>
-
           <ion-col col-6>
             <p><b>Start:</b> {{item.EventStart | date: 'shortTime'}}</p>
             <p><b>End:</b> {{item.EventEnd | date: 'shortTime'}}</p>

@@ -30,6 +30,9 @@ import {EventModalPage} from "../pages/event-modal/event-modal";
       platforms: {
         ios: {
           statusbarPadding: true,
+        },
+        android: {
+          tabsPlacement: 'top',
         }
       }
     })
