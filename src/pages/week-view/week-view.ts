@@ -20,13 +20,18 @@ export class WeekViewPage {
   hasWeekEvents: boolean = true;
   coverRequestClicked: boolean = false;
   eventTypeIdArray: Array<number> = [];
+  userName: any;
 
   constructor(private nav: NavController, public navParams: NavParams, private userService: UserService, private globalFunctions: GlobalFunctions, private modalControl: ModalController) {
-    this.getWeekInfo();
+    this.userName = localStorage.getItem('Username');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad WeekViewPage');
+    this.getWeekInfo();
+  }
+
+  ionViewDidEnter() {
   }
 
   getWeekInfo()

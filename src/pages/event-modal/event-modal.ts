@@ -60,6 +60,10 @@ export class EventModalPage {
       )
   }
 
+  openNoteEdit(){
+
+  }
+
   onCoverRequestClick() {
     let alert = this.alertControl.create({
       title: 'Optional',
@@ -85,8 +89,11 @@ export class EventModalPage {
               // send a cover request
               let toastDate = new Date(this.dateEvent[0].EventStart);
                 let toast = this.toastControl.create({
-                  message: 'Cover request created successfully for ' +  toastDate.getMonth() + "/" + toastDate.getDate() + "/" + toastDate.getFullYear(),
-                  duration: 5000,
+                  message: 'Cover request created successfully for ' +
+                  (toastDate.getMonth() + 1) + "/" +
+                  toastDate.getDate() + "/" +
+                  toastDate.getFullYear() + " (NOTHING HAPPENED THIS IS A TEST)",
+                  duration: 6000,
                   position: 'top'
                 });
 

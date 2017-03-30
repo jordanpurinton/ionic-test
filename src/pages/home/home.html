@@ -18,10 +18,10 @@
       </button>
     </ion-col>
   </ion-row>
-  <ion-grid>
-    <br>
     <ion-item *ngIf="hasEvent">
-      <ion-item text-wrap *ngFor="let item of dateEvent" no-lines="true">
+      <ion-buttons>
+      <ion-item text-wrap *ngFor="let item of dateEvent" no-lines="true" (click)="showEventModal(item.EventStart)">
+        <div>
         <ion-row id="home-grid">
           <ion-col text-wrap>
             <p *ngIf="item.EventTypeId == 1"><b><span style="color: #9CBA6A">SHIFT</span></b>
@@ -60,97 +60,88 @@
           </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-5>
-            <!--<p>Position: {{positionName}}</p>-->
-            <p><b>Start:</b> {{item.EventStart | date:'shortTime'}}</p>
-            <p><b>End:</b> {{item.EventEnd | date:'shortTime'}}</p>
-          </ion-col>
-          <ion-col col-5>
-            <p><b>{{positionName}}</b></p>
+          <ion-col col-10>
+            <p><b>Start: </b>{{item.EventStart | date: 'shortTime'}}</p>
+            <p><b>End: </b>{{item.EventEnd | date: 'shortTime'}}</p>
             <p *ngIf="item.Notes != ''"><b>Notes:</b> {{item.Notes}}</p>
             <p *ngIf="item.Notes == ''"><b>Notes:</b> (None)</p>
           </ion-col>
           <ion-col col-2>
-            <ion-buttons>
-              <button ion-button clear="true" (click)="showEventModal(item.EventStart)">
+              <button ion-button clear="true">
                 <ion-icon name="arrow-dropright-circle" end style="zoom: 130%"></ion-icon>
               </button>
-            </ion-buttons>
           </ion-col>
         </ion-row>
-        <br>
+        </div>
       </ion-item>
+      </ion-buttons>
     </ion-item>
     <ion-item *ngIf="!hasEvent" text-wrap>
       <p style="color: orangered">Looks like you don't have any events on <b>{{dateTime | date: 'MM/dd/yy'}}!</b>
       </p>
     </ion-item>
-    <br>
     <h5 text-center="true" style="font-weight: 200">YOUR NEXT EVENT IS ON:</h5>
-    <ion-item *ngIf="hasNextEvent">
-      <ion-item text-wrap *ngFor="let item of nextEvent" no-lines="true">
-        <h6 text-center="true" style="font-weight: 200; zoom: 140%"><b>{{item.EventStart | date:'MM/dd'}}</b></h6>
-        <ion-row id="next-grid">
-          <ion-col>
-            <p *ngIf="item.EventTypeId == 1"><b><span style="color: #9CBA6A">SHIFT</span></b>
-              <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
-              <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
-            </p>
+    <div *ngIf="hasNextEvent">
+      <ion-item *ngIf="hasEvent">
+        <ion-buttons>
+          <ion-item text-wrap *ngFor="let item of nextEvent" no-lines="true" (click)="showEventModal(item.EventStart)">
+            <div>
+              <ion-row id="next-grid">
+                <ion-col text-wrap>
+                  <p *ngIf="item.EventTypeId == 1"><b><span style="color: #9CBA6A">SHIFT</span></b>
+                    <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
+                    <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
+                    <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
+                  </p>
 
-            <p *ngIf="item.EventTypeId == 2"><b>UNAVAILABLE</b>
-              <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
-              <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
-            </p>
+                  <p *ngIf="item.EventTypeId == 2"><b>UNAVAILABLE</b>
+                    <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
+                    <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
+                    <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
+                  </p>
 
-            <p *ngIf="item.EventTypeId == 3"><b><span style="color: #FFAD00">VACATION</span></b>
-              <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
-              <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
-            </p>
+                  <p *ngIf="item.EventTypeId == 3"><b><span style="color: #FFAD00">VACATION</span></b>
+                    <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
+                    <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
+                    <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
+                  </p>
 
-            <p *ngIf="item.EventTypeId == 4"><b><span style="color: #C41A26">COVER</span></b>
-              <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
-              <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
-            </p>
-
-            <p *ngIf="item.EventTypeId == 6"><b><span style="color: #677A46">CLOCK</span></b>
-              <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
-              <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
-            </p>
-
-            <p *ngIf="item.EventTypeId == 7"><b><span style="color: #FFAD00">ABSENT</span></b>
-              <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
-              <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
-              <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
-            </p>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-5>
-            <p><b>Start:</b> {{item.EventStart | date: 'shortTime'}}</p>
-            <p><b>End:</b> {{item.EventEnd | date: 'shortTime'}}</p>
-          </ion-col>
-          <ion-col col-5>
-            <p><b>{{positionName}}</b></p>
-            <p *ngIf="item.Notes != ''"><b>Notes:</b> {{item.Notes}}</p>
-            <p *ngIf="item.Notes == ''"><b>Notes:</b> (None)</p>
-          </ion-col>
-          <ion-col col-2>
-            <ion-buttons>
-              <button ion-button clear="true" (click)="showEventModal(item.EventStart)">
-                <ion-icon name="arrow-dropright-circle" end style="zoom: 130%"></ion-icon>
-              </button>
-            </ion-buttons>
-          </ion-col>
-        </ion-row>
+                  <p *ngIf="item.EventTypeId == 4"><b><span style="color: #C41A26">COVER</span></b>
+                    <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
+                    <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
+                    <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
+                  </p>
+                  <p *ngIf="item.EventTypeId == 6"><b><span style="color: #677A46">CLOCK</span></b>
+                    <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
+                    <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
+                    <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
+                  </p>
+                  <p *ngIf="item.EventTypeId == 7"><b><span style="color: #FFAD00">ABSENT</span></b>
+                    <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
+                    <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
+                    <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
+                  </p>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col col-10>
+                  <p><b>Start: </b>{{item.EventStart | date: 'shortTime'}}</p>
+                  <p><b>End: </b>{{item.EventEnd | date: 'shortTime'}}</p>
+                  <p *ngIf="item.Notes != ''"><b>Notes:</b> {{item.Notes}}</p>
+                  <p *ngIf="item.Notes == ''"><b>Notes:</b> (None)</p>
+                </ion-col>
+                <ion-col col-2>
+                  <button ion-button clear="true">
+                    <ion-icon name="arrow-dropright-circle" end style="zoom: 130%"></ion-icon>
+                  </button>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-item>
+        </ion-buttons>
       </ion-item>
-    </ion-item>
+    </div>
     <ion-item *ngIf="!hasNextEvent" text-wrap>
       <p style="color: orangered">Looks like you don't have any future events scheduled!</p>
     </ion-item>
-  </ion-grid>
 </ion-content>

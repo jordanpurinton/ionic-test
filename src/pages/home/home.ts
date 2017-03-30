@@ -26,11 +26,14 @@ export class HomePage {
 
   constructor(private userService: UserService, public modalControl: ModalController) {
     this.getDateEvent();
-    this.getNextEvent();
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad HomePage');
+    this.getNextEvent();
+  }
+
+  ionViewDidEnter() {
   }
 
   getPositionName(positionId)

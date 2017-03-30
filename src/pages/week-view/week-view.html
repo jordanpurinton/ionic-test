@@ -10,12 +10,12 @@
 
 
 <ion-content padding>
-  <ion-row>
-  </ion-row>
-  <h6 text-center="true" style="font-weight: 200">YOUR NEXT 7 DAYS:</h6>
+  <ion-row></ion-row>
+  <ion-row></ion-row>
+  <h6 text-center="true" style="font-weight: 200">{{userName.toUpperCase()}}'S NEXT 7 DAYS:</h6>
   <ion-item *ngIf="hasWeekEvents">
-    <ion-grid>
-      <ion-item text-wrap *ngFor="let item of weekInfo">
+    <ion-buttons>
+      <ion-item text-wrap *ngFor="let item of weekInfo" (click)="showEventModal(item.EventStart)">
         <ion-row style="border: 1px; border-color: gainsboro">
           <ion-col col-4>
             <h1 style="color: #993300; font-weight: 100"><b>{{item.EventStart | date:'MM/dd'}}</b></h1>
@@ -60,15 +60,13 @@
             <p><b>End:</b> {{item.EventEnd | date: 'shortTime'}}</p>
           </ion-col>
           <ion-col col-2>
-            <ion-buttons>
-              <button ion-button clear="true" (click)="showEventModal(item.EventStart)">
-                <ion-icon name="arrow-dropright-circle" end style="zoom: 130%"></ion-icon>
-              </button>
-            </ion-buttons>
+            <button ion-button clear="true">
+              <ion-icon name="arrow-dropright-circle" end style="zoom: 130%"></ion-icon>
+            </button>
           </ion-col>
         </ion-row>
       </ion-item>
-    </ion-grid>
+    </ion-buttons>
   </ion-item>
   <ion-item *ngIf="!hasWeekEvents" text-wrap>
     <p style="color: orangered">Looks like you don't have any events scheduled for the next seven days!</p>
