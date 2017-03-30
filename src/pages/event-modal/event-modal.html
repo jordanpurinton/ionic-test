@@ -69,14 +69,14 @@
     </ion-row><br>
     <ion-row>
         <p *ngIf="item.Notes != ''">
-          <b>Notes:</b>{{item.Notes}}
-            <button ion-button clear (click)="openNoteEdit">
+          <b>Notes: </b>{{item.Notes}}
+            <button ion-button clear (click)="openNoteEdit()" >
             <ion-icon name="create" end></ion-icon>
             </button>
         </p>
         <p *ngIf="item.Notes == ''">
           <b>Notes:</b> (None)
-            <button ion-button clear>
+            <button ion-button clear (click)="openNoteEdit()">
             <ion-icon name="create" end></ion-icon>
             </button>
         </p>

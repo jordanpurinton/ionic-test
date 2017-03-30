@@ -61,7 +61,7 @@ export class EventModalPage {
   }
 
   openNoteEdit(){
-
+    console.log('NOTES ' + this.dateEvent[0].Notes);
   }
 
   onCoverRequestClick() {

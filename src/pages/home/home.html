@@ -81,11 +81,12 @@
       </p>
     </ion-item>
     <h5 text-center="true" style="font-weight: 200">YOUR NEXT EVENT IS ON:</h5>
-    <div *ngIf="hasNextEvent">
-      <ion-item *ngIf="hasEvent">
+    <ion-item *ngIf="hasNextEvent">
+        <ion-item text-wrap *ngFor="let item of nextEvent" no-lines="true" (click)="showEventModal(item.EventStart)">
+          <h6 text-center="true" style="font-weight: 200"><b>{{item.EventStart | date:'MM/dd'}}</b></h6>
         <ion-buttons>
-          <ion-item text-wrap *ngFor="let item of nextEvent" no-lines="true" (click)="showEventModal(item.EventStart)">
-            <div>
+            <br>
+              <div>
               <ion-row id="next-grid">
                 <ion-col text-wrap>
                   <p *ngIf="item.EventTypeId == 1"><b><span style="color: #9CBA6A">SHIFT</span></b>
@@ -137,10 +138,9 @@
                 </ion-col>
               </ion-row>
             </div>
-          </ion-item>
         </ion-buttons>
       </ion-item>
-    </div>
+    </ion-item>
     <ion-item *ngIf="!hasNextEvent" text-wrap>
       <p style="color: orangered">Looks like you don't have any future events scheduled!</p>
     </ion-item>
