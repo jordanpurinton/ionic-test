@@ -12,17 +12,21 @@ import {UserService} from "../../providers/user-service";
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
-  // this tells the tabs component which Pages
-  // should be each tab's root Page
   home: any = HomePage;
   weekView: any = WeekViewPage;
   shiftRequestPage: any = ShiftRequestPage;
   settingsPage: any = SettingsPage;
   firstName: any = localStorage.getItem('FirstName');
-  constructor(private alertController: AlertController, public nav: NavController, public userService: UserService){
+  constructor(private alertController: AlertController, public nav: NavController, public userService: UserService)
+  {
   }
 
-  logout() {
+  /**
+   * Logout button that is on every page. Asks user if they went to log out,
+   * clears local storage and redirect to the login page.
+   */
+  logout()
+  {
 
     let logoutAlert = this.alertController.create({
       title : 'Log Out',
@@ -44,6 +48,5 @@ export class TabsPage {
       ]
     });
     logoutAlert.present();
-
   }
 }

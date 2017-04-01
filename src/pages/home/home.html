@@ -10,10 +10,11 @@
   <ion-row>
     <ion-col id="date-picker-col">
       <button ion-button full round>
-        <u>
-          <ion-datetime displayFormat="MMM DD, YYYY" [(ngModel)]="dateTime"
-                        (ionChange)="getDateEvent()"></ion-datetime>
-        </u>
+        <u><ion-datetime
+          displayFormat="MMM DD, YYYY"
+          [(ngModel)]="dateTime"
+          (ionChange)="getDateEvent()">
+        </ion-datetime></u>
         <ion-icon name="arrow-dropright" end></ion-icon>
       </button>
     </ion-col>

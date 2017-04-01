@@ -22,18 +22,21 @@ export class WeekViewPage {
   eventTypeIdArray: Array<number> = [];
   userName: any;
 
-  constructor(private nav: NavController, public navParams: NavParams, private userService: UserService, private globalFunctions: GlobalFunctions, private modalControl: ModalController) {
+  constructor(private nav: NavController, public navParams: NavParams, private userService: UserService, private globalFunctions: GlobalFunctions, private modalControl: ModalController)
+  {
+    this.getWeekInfo();
     this.userName = localStorage.getItem('Username');
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad()
+  {
     console.log('ionViewDidLoad WeekViewPage');
-    this.getWeekInfo();
   }
 
-  ionViewDidEnter() {
-  }
-
+  /**
+   * Get the next 7 days of schedule event(s) for an employee
+   * and dislay them on the screen.
+   */
   getWeekInfo()
   {
     this.userService.getWeekView()
@@ -53,6 +56,10 @@ export class WeekViewPage {
     );
   }
 
+  /**
+   * Open a modal for a singular schedule event, displaying expanded event information.
+   * @param date
+   */
   showEventModal(date) {
     let eventModal = this.modalControl.create(EventModalPage, {modalDate: date});
     eventModal.present();

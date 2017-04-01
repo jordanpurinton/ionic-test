@@ -1,13 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {
   NavController, NavParams, ViewController, ModalController, AlertController,
   ToastController
 } from 'ionic-angular';
 import {UserService} from "../../providers/user-service";
 
-/*
-
- */
 @Component({
   selector: 'event-modal',
   templateUrl: 'event-modal.html'
@@ -23,19 +20,29 @@ export class EventModalPage {
               public navParams: NavParams,
               public viewControl: ViewController,
               public toastControl: ToastController,
-              public userService: UserService) {
-    this.getDateEvent(this.modalDate);
+              public userService: UserService)
+  {
+    this.getDateEvent(this.modalDate); // load information for the date passed in through nav params
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad()
+  {
     console.log('ionViewDidLoad ModalPage');
   }
 
-  closeModal() {
+  /**
+   * Dismiss modal and return to previous page.
+   */
+  closeModal()
+  {
     this.viewControl.dismiss();
     this.getDateEvent(this.modalDate);
   }
 
+  /**
+   * Use positionId from local storage to retrieve the employee's position title.
+   * @param positionId
+   */
   getPositionName(positionId)
   {
     this.userService.getPositionName(positionId)
@@ -45,6 +52,13 @@ export class EventModalPage {
         }
       );
   }
+
+  /**
+   * Grab schedule event information using the date passed in
+   * through navigation parameters. This will display scheudle event
+   * information on the page.
+   * @param date
+   */
   getDateEvent(date)
   {
     this.userService.getDateEvent(date)
@@ -62,7 +76,15 @@ export class EventModalPage {
       )
   }
 
-  openNoteEdit(noteText, scheduleEventId){
+  /**
+   * Prompt to add/edit note for the opened schedule event.
+   * Fires an API call that will change note text stored
+   * in our db.
+   * @param noteText
+   * @param scheduleEventId
+   */
+  openNoteEdit(noteText, scheduleEventId)
+  {
     let alert = this.alertControl.create({
       title: 'Edit/Add Event Note',
       inputs: [
@@ -84,7 +106,7 @@ export class EventModalPage {
             this.userService.updateNote(data[0], scheduleEventId)
               .map(res => console.log(res))
               .subscribe(
-                res =>
+                res => // successful edit
                 {
                   this.getDateEvent(this.modalDate); // reload event if note is updated successfully
                   let toastDate = new Date(this.dateEvent[0].EventStart);
@@ -102,10 +124,9 @@ export class EventModalPage {
                   toast.onDidDismiss(() => {
                     console.log('Dismissed toast');
                   });
-
                   toast.present();
                 },
-                err =>
+                err => // unsuccessful edit
                 {
                   console.log(err);
                 }
@@ -117,7 +138,14 @@ export class EventModalPage {
     alert.present();
   }
 
-  onCoverRequestClick() {
+  /**
+   * Prompt user to confirm cover request message.
+   * Gives option to send a message alongside the request.
+   *
+   * @TODO actually implement this
+   */
+  onCoverRequestClick()
+  {
     let alert = this.alertControl.create({
       title: 'Optional',
       message: 'Enter a message to send to admins with your cover request',
@@ -138,28 +166,42 @@ export class EventModalPage {
         {
           text: 'Send',
           handler: data => {
-            if (1==1) {
-              // send a cover request
+            if (1 == 1) // successful cover request
+            {
               let toastDate = new Date(this.dateEvent[0].EventStart);
-                let toast = this.toastControl.create({
-                  message: 'Cover request created successfully for ' +
-                  (toastDate.getMonth() + 1) + "/" +
-                  toastDate.getDate() + "/" +
-                  toastDate.getFullYear() + " (NOTHING HAPPENED THIS IS A TEST)",
-                  duration: 6000,
-                  position: 'bottom',
-                  showCloseButton: true,
-                  closeButtonText: 'Dismiss'
-                });
+              let toast = this.toastControl.create({
+                message: 'Cover request created successfully for ' +
+                (toastDate.getMonth() + 1) + '/' +
+                toastDate.getDate() + '/' +
+                toastDate.getFullYear() + ' (NOTHING HAPPENED THIS IS A TEST)',
+                duration: 6000,
+                position: 'bottom',
+                showCloseButton: true,
+                closeButtonText: 'Dismiss'
+              });
 
-                toast.onDidDismiss(() => {
-                  console.log('Dismissed toast');
-                });
+              toast.onDidDismiss(() => {
+                console.log('Dismissed toast');
+              });
 
-                toast.present();
+              toast.present();
 
-            } else {
-              // uh oh
+            }
+            else // unsuccessful cover request
+            {
+              let toast = this.toastControl.create({
+                message: 'Uh oh! Something went wrong and the cover request was not sent.',
+                duration: 6000,
+                position: 'bottom',
+                showCloseButton: true,
+                closeButtonText: 'Dismiss'
+              });
+
+              toast.onDidDismiss(() => {
+                console.log('Dismissed toast');
+              });
+
+              toast.present();
               return;
             }
           }

@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, Loading } from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
-import { HomePage } from '../home/home';
 import {TabsPage} from "../tabs/tabs";
 import {UserService} from "../../providers/user-service";
 import {GlobalFunctions} from "../../providers/global-functions";
-import {JwtHelper} from 'angular2-jwt';
 import 'rxjs/Rx';
 
 
@@ -15,14 +13,11 @@ import 'rxjs/Rx';
 })
 export class LoginPage {
   registerCredentials = {username: 'jordan.purinton', password: 'abcdef'};  // EMPTY BY DEFAULT DON'T FORGET TO CHANGE THIS SWEET JESUS
-  jwtHelper: JwtHelper = new JwtHelper();
-  user: string;
-  error: string;
 
-
-  constructor(private nav: NavController, private authService: AuthService,
-               private userService: UserService, private globalFunctions: GlobalFunctions) {
-
+  constructor(private nav: NavController,
+              private authService: AuthService,
+               private userService: UserService,
+              private globalFunctions: GlobalFunctions) {
   }
 
   ionViewDidEnter()
@@ -30,9 +25,16 @@ export class LoginPage {
     localStorage.clear();
   }
 
-  public login() {
-    this.globalFunctions.showLoading();
+  /**
+   * Check user login information by making call to API.
+   * If login is successful, UserId and EmployeeId are stored in local storage.
+   */
+  public login()
+  {
 
+    this.globalFunctions.showLoading(); // loading wheel
+
+    // take username from input and check if there is a corresponding UserId for that username
     this.userService.getUserIdFromUserName(this.registerCredentials.username)
       .map(res => res.toString())
       .do(userId => localStorage.setItem('UserId', userId))
@@ -43,13 +45,12 @@ export class LoginPage {
       .map(res => res)
 
       .subscribe(
-        res => {
-          // console.log(employeeId);
+        success => { // login success
           localStorage.setItem("Username", this.registerCredentials.username);
           this.nav.push(TabsPage);
           this.globalFunctions.loading.dismissAll();
         },
-        err => {
+        err => { // login failure
           this.globalFunctions.loading.dismissAll();
           this.globalFunctions.showAlert("Uh oh!", "Something went wrong. Please re-enter your" +
             " credentials or check your connection.");

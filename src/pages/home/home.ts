@@ -22,22 +22,30 @@ export class HomePage {
   hasNextEvent: boolean = true;
   positionName: any;
 
-
-
-  constructor(private userService: UserService, public modalControl: ModalController) {
+  constructor(private userService: UserService, public modalControl: ModalController)
+  {
     this.getNextEvent();
     this.getDateEvent();
   }
 
-  ionViewDidLoad() {
+  ionViewDidLoad()
+  {
     console.log('ionViewDidLoad HomePage');
   }
 
+  /**
+   * Get event information for the current date and the next
+   * schedule event (if there is one).
+   */
   ionViewDidEnter() {
     this.getNextEvent();
     this.getDateEvent();
   }
 
+  /**
+   * Use positionId from local storage to retrieve the employee's position title.
+   * @param positionId
+   */
   getPositionName(positionId)
   {
     this.userService.getPositionName(positionId)
@@ -48,12 +56,15 @@ export class HomePage {
       );
   }
 
+  /**
+   * Grab schedule event information for the date
+   * selected in the date picker and display information.
+   */
   getDateEvent()
   {
     this.userService.getDateEvent(this.dateTime)
       .subscribe(
-        data => {
-          // console.log(data);
+        data => { // success
           this.dateEvent = data;
           this.hasEvent = true;
           localStorage.setItem('PositionId', data[0].PositionId);
@@ -61,12 +72,18 @@ export class HomePage {
           this.eventTypeId = data[0].EventTypeId;
 
         },
-        err => {
+        err => { // fail
           this.hasEvent = false;
           console.log(err);
         }
       )
   }
+
+  /**
+   * Take the current date and the next schedule event
+   * on employee's schedule (if there is one) and displays
+   * at the bottom of the screen.
+   */
   getNextEvent()
   {
     this.userService.getNextEvent()
@@ -83,6 +100,9 @@ export class HomePage {
 
   }
 
+  /**
+   * Show date in date picker.
+   */
   selectDate()
   {
     DatePicker.show({
@@ -94,6 +114,10 @@ export class HomePage {
     );
   }
 
+  /**
+   * Open a modal for a singular schedule event, displaying expanded event information.
+   * @param date
+   */
   showEventModal(date)
   {
     let eventModal = this.modalControl.create(EventModalPage, {
