@@ -10,29 +10,27 @@ import {NavController} from "ionic-angular";
 @Injectable()
 export class AuthService {
 
-  jwtHelper: JwtHelper = new JwtHelper();
-  user: string;
-  error: string;
-
   constructor(private http: Http) {
-
   }
 
-  public authenticated() {
-    return tokenNotExpired();
-  }
-
-  public login(credentials) {
+  /**
+   * Take credentials from input fields and makes API call to verify user authentication.
+   * Returns type of Observable, which we await and subscribe to in login.ts.
+   * @param credentials
+   * @returns {Observable<R>}
+   */
+  public login(credentials)
+  {
     let body = JSON.stringify({username: credentials.username, password: credentials.password});
-    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let headers = new Headers({'Content-Type': 'application/json'});
     let options = new RequestOptions({headers: headers});
 
-      return this.http.post(secret.Uri + '/api/membership/authenticate', body, options)
-        .map(
-        response =>
-          console.log('Authentication successful'),
-          err =>
-            console.log(err));
+    return this.http.post(secret.Uri + '/api/membership/authenticate', body, options)
+      .map(
+        response => // successful login
+          console.log(response),
+        err => // unsuccessful login
+          console.log(err));
   }
 
 }

@@ -22,9 +22,4 @@ export class OrbitalShiftApp {
     });
 
   }
-
-  public isLoggedIn()
-  {
-    return localStorage.getItem('isLoggedIn');
-  }
 }
