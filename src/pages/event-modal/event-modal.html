@@ -17,7 +17,7 @@
         <h1 style="color: #993300; font-weight: 100"><b>{{item.EventStart | date:'MM/dd'}}</b></h1>
         <ion-row></ion-row><br>
         <p *ngIf="item.EventTypeId == 1"><b><span style="color: #9CBA6A">SHIFT</span></b>
-          <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
+          <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A"><p></p>Approved</span>
           <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
           <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
         </p>
@@ -28,7 +28,7 @@
           <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
         </p>
 
-        <p *ngIf="item.EventTypeId == 3"><b><span style="color: #FFAD00">VACATION</span></b><br>
+        <p *ngIf="item.EventTypeId == 3"><b><span style="color: #FFAD00">VACATION</span></b>
           <span *ngIf="item.EventStatusId == 1" style="float: right; color: #9CBA6A">Approved</span>
           <span *ngIf="item.EventStatusId == 2" style="float: right; color: #C41A26">Request</span>
           <span *ngIf="item.EventStatusId == 4" style="float: right">Request Denied</span>
@@ -70,13 +70,13 @@
     <ion-row>
         <p *ngIf="item.Notes != ''">
           <b>Notes: </b>{{item.Notes}}
-            <button ion-button clear (click)="openNoteEdit()" >
+            <button ion-button clear (click)="openNoteEdit(item.Notes, item.ScheduleEventId)" >
             <ion-icon name="create" end></ion-icon>
             </button>
         </p>
         <p *ngIf="item.Notes == ''">
           <b>Notes:</b> (None)
-            <button ion-button clear (click)="openNoteEdit()">
+            <button ion-button clear (click)="openNoteEdit(item.Notes, item.ScheduleEventId)">
             <ion-icon name="create" end></ion-icon>
             </button>
         </p>

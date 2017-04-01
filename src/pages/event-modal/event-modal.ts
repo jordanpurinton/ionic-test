@@ -17,6 +17,7 @@ export class EventModalPage {
   dateEvent: any;
   eventTypeId: any;
   modalDate: any = this.navParams.get('modalDate');
+  noteUpdateSuccessful: boolean = false;
 
   constructor(public alertControl: AlertController,
               public navParams: NavParams,
@@ -60,8 +61,57 @@ export class EventModalPage {
       )
   }
 
-  openNoteEdit(){
-    console.log('NOTES ' + this.dateEvent[0].Notes);
+  openNoteEdit(noteText, scheduleEventId){
+    let alert = this.alertControl.create({
+      title: 'Edit/Add Event Note',
+      inputs: [
+        {
+          value: noteText
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Submit',
+          handler: data => {
+            this.userService.updateNote(data[0], scheduleEventId)
+              .map(res => console.log(res))
+              .subscribe(
+                res =>
+                {
+                  this.getDateEvent(this.modalDate); // reload event if note is updated successfully
+                  let toastDate = new Date(this.dateEvent[0].EventStart);
+                  let toast = this.toastControl.create({
+                    message: 'Note added for event on ' +
+                    (toastDate.getMonth() + 1) + "/" +
+                    toastDate.getDate() + "/" +
+                    toastDate.getFullYear(),
+                    duration: 6000,
+                    position: 'bottom'
+                  });
+
+                  toast.onDidDismiss(() => {
+                    console.log('Dismissed toast');
+                  });
+
+                  toast.present();
+                },
+                err =>
+                {
+                  console.log(err);
+                }
+              )
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   onCoverRequestClick() {
@@ -94,7 +144,7 @@ export class EventModalPage {
                   toastDate.getDate() + "/" +
                   toastDate.getFullYear() + " (NOTHING HAPPENED THIS IS A TEST)",
                   duration: 6000,
-                  position: 'top'
+                  position: 'bottom'
                 });
 
                 toast.onDidDismiss(() => {

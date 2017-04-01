@@ -14,7 +14,7 @@ import 'rxjs/Rx';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  registerCredentials = {username: '', password: ''};
+  registerCredentials = {username: 'jordan.purinton', password: 'abcdef'};  // EMPTY BY DEFAULT DON'T FORGET TO CHANGE THIS SWEET JESUS
   jwtHelper: JwtHelper = new JwtHelper();
   user: string;
   error: string;

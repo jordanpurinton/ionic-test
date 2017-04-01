@@ -25,8 +25,8 @@ export class HomePage {
 
 
   constructor(private userService: UserService, public modalControl: ModalController) {
-    this.getDateEvent();
     this.getNextEvent();
+    this.getDateEvent();
   }
 
   ionViewDidLoad() {

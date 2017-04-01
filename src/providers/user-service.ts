@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Http} from "@angular/http";
+import {Http, RequestOptions, Headers} from "@angular/http";
 import {Observable} from 'rxjs/Rx'
 
 
@@ -10,7 +10,7 @@ export class UserService {
   constructor(private http: Http) {
   }
 
-  //TODO come back and encode
+  //TODO come back and encode and make this secure-er
 
   getUserIdFromUserName(username) {
 
@@ -58,6 +58,18 @@ export class UserService {
 
   getPositionName(positionId) {
     return this.http.get("http://localhost:56586/api/positions/position-name/" + positionId)
+      .map(
+        response => response.json(),
+        err => console.log(err))
+  }
+
+  updateNote(noteText, scheduleEventId)
+  {
+    let noteBody = JSON.stringify({NoteText: noteText});
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let reqOpts = new RequestOptions({headers: headers});
+
+    return this.http.patch("http://localhost:56586/api/schedule-events/update-note/" + scheduleEventId, noteBody, reqOpts)
       .map(
         response => response.json(),
         err => console.log(err))

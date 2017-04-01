@@ -12,6 +12,7 @@ import {UserService} from "../providers/user-service";
 import {KeysPipe} from "../providers/keys-pipe";
 import {GlobalFunctions} from '../providers/global-functions';
 import {EventModalPage} from "../pages/event-modal/event-modal";
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 
 @NgModule({
   declarations: [
