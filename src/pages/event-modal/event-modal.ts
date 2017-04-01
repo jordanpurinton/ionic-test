@@ -33,6 +33,7 @@ export class EventModalPage {
 
   closeModal() {
     this.viewControl.dismiss();
+    this.getDateEvent(this.modalDate);
   }
 
   getPositionName(positionId)
@@ -93,7 +94,9 @@ export class EventModalPage {
                     toastDate.getDate() + "/" +
                     toastDate.getFullYear(),
                     duration: 6000,
-                    position: 'bottom'
+                    position: 'bottom',
+                    showCloseButton: true,
+                    closeButtonText: 'Dismiss'
                   });
 
                   toast.onDidDismiss(() => {
@@ -144,7 +147,9 @@ export class EventModalPage {
                   toastDate.getDate() + "/" +
                   toastDate.getFullYear() + " (NOTHING HAPPENED THIS IS A TEST)",
                   duration: 6000,
-                  position: 'bottom'
+                  position: 'bottom',
+                  showCloseButton: true,
+                  closeButtonText: 'Dismiss'
                 });
 
                 toast.onDidDismiss(() => {

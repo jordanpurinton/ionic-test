@@ -1,0 +1,69 @@
+h6
+{
+  font-weight: 200;
+}
+
+.week-event-item ion-row
+{
+  border: 1px;
+  border-color: gainsboro;
+
+}
+.week-event-item h1
+{
+  font-weight: 100;
+}
+.shift-event b
+{
+  color: #9CBA6A;
+}
+
+.week-approved-event
+{
+  color: #9CBA6A;
+}
+
+.week-unavailable-event b
+{
+  zoom: 80%;
+}
+
+.week-request-event
+{
+  color: #C41A26;
+}
+
+.vacation-event b
+{
+  color: #FFAD00;
+}
+
+.cover-event b
+{
+  color: #C41A26;
+}
+
+.clock-event b
+{
+  color: #677A46;
+}
+
+.absent-event b
+{
+  color: #FFAD00;
+}
+
+.denied-event
+{
+  float: right;
+}
+
+.expand-arrow
+{
+  zoom: 130%
+}
+
+.error-text
+{
+  color: orangered;
+}

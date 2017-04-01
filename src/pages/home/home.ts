@@ -33,13 +33,17 @@ export class HomePage {
     console.log('ionViewDidLoad HomePage');
   }
 
+  ionViewDidEnter() {
+    this.getNextEvent();
+    this.getDateEvent();
+  }
+
   getPositionName(positionId)
   {
     this.userService.getPositionName(positionId)
       .subscribe(
         data => {
           this.positionName = data;
-          // console.log(data);
         }
       );
   }
@@ -90,8 +94,17 @@ export class HomePage {
     );
   }
 
-  showEventModal(date) {
-    let eventModal = this.modalControl.create(EventModalPage, {modalDate: date});
+  showEventModal(date)
+  {
+    let eventModal = this.modalControl.create(EventModalPage, {
+      modalDate: date,
+      });
+
+    eventModal.onDidDismiss(() =>
+    {
+      this.getDateEvent();
+    });
+
     eventModal.present();
   }
 
