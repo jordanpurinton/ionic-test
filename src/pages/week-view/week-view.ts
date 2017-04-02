@@ -1,16 +1,9 @@
 import { Component } from '@angular/core';
 import {NavController, NavParams, ModalController} from 'ionic-angular';
 import {UserService} from "../../providers/user-service";
-import {KeysPipe} from '../../providers/keys-pipe'
 import {GlobalFunctions} from "../../providers/global-functions";
 import {EventModalPage} from "../event-modal/event-modal";
 
-/*
-  Generated class for the WeekView page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-week-view',
   templateUrl: 'week-view.html'
@@ -34,8 +27,8 @@ export class WeekViewPage {
   }
 
   /**
-   * Get the next 7 days of schedule event(s) for an employee
-   * and dislay them on the screen.
+   * Get the next 7 days of schedule event(s)
+   * for an employee and display them on the screen.
    */
   getWeekInfo()
   {
@@ -51,16 +44,18 @@ export class WeekViewPage {
       },
       err => {
         this.hasWeekEvents = false;
-        console.error("Error: " + err);
+        console.log(err);
       }
     );
   }
 
   /**
-   * Open a modal for a singular schedule event, displaying expanded event information.
+   * Open a modal for a singular schedule
+   * event, displaying expanded event information.
    * @param date
    */
-  showEventModal(date) {
+  showEventModal(date)
+  {
     let eventModal = this.modalControl.create(EventModalPage, {modalDate: date});
     eventModal.present();
   }

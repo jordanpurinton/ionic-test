@@ -1,73 +1,62 @@
-<!--
-  Generated template for the WeekView page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
 </ion-header>
-
-
 <ion-content padding>
   <ion-row></ion-row>
   <ion-row></ion-row>
   <h6 text-center="true">{{userName.toUpperCase()}}'S NEXT 7 DAYS:</h6>
-  <ion-item class="week-event-item" *ngIf="hasWeekEvents">
-    <ion-buttons>
-      <ion-item text-wrap *ngFor="let item of weekInfo" (click)="showEventModal(item.EventStart)">
-        <ion-row>
-          <ion-col col-5>
-            <h1><b>{{item.EventStart | date:'MM/dd'}}</b></h1>
-            <p class="shift-event" *ngIf="item.EventTypeId == 1"><b><span>SHIFT</span></b><br>
-              <span class="week-approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
-              <span class="week-request-event" *ngIf="item.EventStatusId == 2">Request</span>
-              <span *ngIf="item.EventStatusId == 4">Request<br>Denied</span>
-            </p>
+  <ion-buttons class="week-event-item" *ngIf="hasWeekEvents">
+    <ion-item text-wrap *ngFor="let item of weekInfo" (click)="showEventModal(item.EventStart)">
+      <ion-row>
+        <ion-col col-5>
+          <h1><b>{{item.EventStart | date:'MM/dd'}}</b></h1>
+          <p class="shift-event" *ngIf="item.EventTypeId == 1"><b><span>SHIFT</span></b><br>
+            <span class="week-approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
+            <span class="week-request-event" *ngIf="item.EventStatusId == 2">Request</span>
+            <span *ngIf="item.EventStatusId == 4">Request<br>Denied</span>
+          </p>
 
-            <p class="week-unavailable-event" *ngIf="item.EventTypeId == 2"><b><span>UNAVAILABLE</span></b><br>
-              <span class="week-approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
-              <span class="week-request-event" *ngIf="item.EventStatusId == 2">Request</span>
-              <span *ngIf="item.EventStatusId == 4">Request<br>Denied</span>
-            </p>
+          <p class="week-unavailable-event" *ngIf="item.EventTypeId == 2"><b><span>UNAVAILABLE</span></b><br>
+            <span class="week-approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
+            <span class="week-request-event" *ngIf="item.EventStatusId == 2">Request</span>
+            <span *ngIf="item.EventStatusId == 4">Request<br>Denied</span>
+          </p>
 
-            <p class="vacation-event" *ngIf="item.EventTypeId == 3"><b><span>VACATION</span></b><br>
-              <span class="week-approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
-              <span class="week-request-event" *ngIf="item.EventStatusId == 2">Request</span>
-              <span *ngIf="item.EventStatusId == 4">Request<br>Denied</span>
-            </p>
+          <p class="vacation-event" *ngIf="item.EventTypeId == 3"><b><span>VACATION</span></b><br>
+            <span class="week-approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
+            <span class="week-request-event" *ngIf="item.EventStatusId == 2">Request</span>
+            <span *ngIf="item.EventStatusId == 4">Request<br>Denied</span>
+          </p>
 
-            <p class="cover-event" *ngIf="item.EventTypeId == 4"><b><span>COVER</span></b><br>
-              <span class="week-approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
-              <span class="week-request-event" *ngIf="item.EventStatusId == 2">Request</span>
-              <span *ngIf="item.EventStatusId == 4">Request<br>Denied</span>
-            </p>
+          <p class="cover-event" *ngIf="item.EventTypeId == 4"><b><span>COVER</span></b><br>
+            <span class="week-approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
+            <span class="week-request-event" *ngIf="item.EventStatusId == 2">Request</span>
+            <span *ngIf="item.EventStatusId == 4">Request<br>Denied</span>
+          </p>
 
-            <p class="clock-event" *ngIf="item.EventTypeId == 6"><b><span>CLOCK</span></b><br>
-              <span class="week-approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
-              <span class="week-request-event" *ngIf="item.EventStatusId == 2">Request</span>
-              <span *ngIf="item.EventStatusId == 4">Request<br>Denied</span>
-            </p>
+          <p class="clock-event" *ngIf="item.EventTypeId == 6"><b><span>CLOCK</span></b><br>
+            <span class="week-approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
+            <span class="week-request-event" *ngIf="item.EventStatusId == 2">Request</span>
+            <span *ngIf="item.EventStatusId == 4">Request<br>Denied</span>
+          </p>
 
-            <p class="absent-event" *ngIf="item.EventTypeId == 7"><b><span>ABSENT</span></b><br>
-              <span class="week-approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
-              <span class="week-request-event" *ngIf="item.EventStatusId == 2">Request</span>
-              <span *ngIf="item.EventStatusId == 4">Request<br>Denied</span>
-            </p>
-          </ion-col>
-          <ion-col col-5>
-            <p><b>Start:</b> {{item.EventStart | date: 'shortTime'}}</p>
-            <p><b>End:</b> {{item.EventEnd | date: 'shortTime'}}</p>
-          </ion-col>
-          <ion-col col-2>
-            <button ion-button clear="true">
-              <ion-icon class="expand-arrow" name="arrow-dropright-circle" end></ion-icon>
-            </button>
-          </ion-col>
-        </ion-row>
-      </ion-item>
-    </ion-buttons>
-  </ion-item>
+          <p class="absent-event" *ngIf="item.EventTypeId == 7"><b><span>ABSENT</span></b><br>
+            <span class="week-approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
+            <span class="week-request-event" *ngIf="item.EventStatusId == 2">Request</span>
+            <span *ngIf="item.EventStatusId == 4">Request<br>Denied</span>
+          </p>
+        </ion-col>
+        <ion-col col-5>
+          <p><b>Start:</b> {{item.EventStart | date: 'shortTime'}}</p>
+          <p><b>End:</b> {{item.EventEnd | date: 'shortTime'}}</p>
+        </ion-col>
+        <ion-col col-2>
+          <button ion-button clear="true">
+            <ion-icon class="expand-arrow" name="arrow-dropright-circle" end></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-buttons>
   <ion-item *ngIf="!hasWeekEvents" text-wrap>
     <p class="error-text">Looks like you don't have any events scheduled for the next seven days!</p>
   </ion-item>

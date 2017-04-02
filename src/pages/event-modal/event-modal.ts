@@ -1,9 +1,7 @@
 import {Component} from '@angular/core';
-import {
-  NavController, NavParams, ViewController, ModalController, AlertController,
-  ToastController
-} from 'ionic-angular';
+import {NavParams, ViewController, AlertController, ToastController} from 'ionic-angular';
 import {UserService} from "../../providers/user-service";
+import {DatePicker} from "ionic-native";
 
 @Component({
   selector: 'event-modal',
@@ -63,14 +61,13 @@ export class EventModalPage {
   {
     this.userService.getDateEvent(date)
       .subscribe(
-        data => {
-          // console.log(data);
+        data => { // schedule event retrieval success
           this.dateEvent = data;
           localStorage.setItem('PositionId', data[0].PositionId);
           this.getPositionName(localStorage.getItem("PositionId"));
           this.eventTypeId = data[0].EventTypeId;
         },
-        err => {
+        err => { // unsuccessful schedule event retrieval
           console.log(err);
         }
       )
@@ -106,7 +103,7 @@ export class EventModalPage {
             this.userService.updateNote(data[0], scheduleEventId)
               .map(res => console.log(res))
               .subscribe(
-                res => // successful edit
+                success => // successful edit
                 {
                   this.getDateEvent(this.modalDate); // reload event if note is updated successfully
                   let toastDate = new Date(this.dateEvent[0].EventStart);
@@ -136,6 +133,42 @@ export class EventModalPage {
       ]
     });
     alert.present();
+  }
+
+  /**
+   * Open time picker for event start.
+   */
+  openEventStartEdit()
+  {
+      DatePicker.show({
+        date: new Date(),
+        mode: 'date'
+      }).then(
+        date => {
+          console.log(date)
+        },
+        err => {
+          console.log(err)
+        }
+      );
+  }
+
+  /**
+   * Open time picker for event end.
+   */
+  openEventEndEdit()
+  {
+    DatePicker.show({
+      date: new Date(),
+      mode: 'hh mm A'
+    }).then(
+      endTime => {
+        console.log(endTime)
+      },
+      err => {
+        console.log(err)
+      }
+    );
   }
 
   /**

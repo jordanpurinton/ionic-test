@@ -12,7 +12,8 @@ import {Observable} from 'rxjs/Rx'
 export class UserService {
 
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
   /**
    * Take username from input field and check if there is a corresponding user id.
    * @param username

@@ -11,78 +11,80 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-item class="modal-item" text-wrap *ngFor="let item of dateEvent" no-lines="true">
-    <ion-row id="modal-grid">
-      <ion-col text-wrap>
-        <h1><b>{{item.EventStart | date:'MM/dd'}}</b></h1>
-        <ion-row></ion-row><br>
-        <p class="modal-shift-event" *ngIf="item.EventTypeId == 1"><b><span>SHIFT</span></b>
-          <span class="approved-event" *ngIf="item.EventStatusId == 1"><p></p>Approved</span>
-          <span class="request-event" *ngIf="item.EventStatusId == 2">Request</span>
-          <span class="modal-denied-event" *ngIf="item.EventStatusId == 4">Request Denied</span>
-        </p>
+  <ion-item-group class="modal-item" text-wrap *ngFor="let item of dateEvent">
+    <ion-item>
+      <ion-row id="modal-grid">
+        <ion-col text-wrap>
+          <h1 text-center="true"><b>{{item.EventStart | date:'MM/dd'}}</b></h1>
+          <ion-row></ion-row>
+          <br>
+          <p class="modal-shift-event" *ngIf="item.EventTypeId == 1"><b><span>SHIFT</span></b>
+            <span class="approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
+            <span class="request-event" *ngIf="item.EventStatusId == 2">Request</span>
+            <span class="modal-denied-event" *ngIf="item.EventStatusId == 4">Request Denied</span>
+          </p>
 
-        <p *ngIf="item.EventTypeId == 2"><b>UNAVAILABLE</b>
-          <span class="approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
-          <span class="request-event" *ngIf="item.EventStatusId == 2">Request</span>
-          <span class="modal-denied-event" *ngIf="item.EventStatusId == 4">Request Denied</span>
-        </p>
+          <p *ngIf="item.EventTypeId == 2"><b>UNAVAILABLE</b>
+            <span class="approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
+            <span class="request-event" *ngIf="item.EventStatusId == 2">Request</span>
+            <span class="modal-denied-event" *ngIf="item.EventStatusId == 4">Request Denied</span>
+          </p>
 
-        <p class="vacation-event" *ngIf="item.EventTypeId == 3"><b><span>VACATION</span></b>
-          <span class="approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
-          <span class="request-event" *ngIf="item.EventStatusId == 2">Request</span>
-          <span class="modal-denied-event" *ngIf="item.EventStatusId == 4">Request Denied</span>
-        </p>
+          <p class="vacation-event" *ngIf="item.EventTypeId == 3"><b><span>VACATION</span></b>
+            <span class="approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
+            <span class="request-event" *ngIf="item.EventStatusId == 2">Request</span>
+            <span class="modal-denied-event" *ngIf="item.EventStatusId == 4">Request Denied</span>
+          </p>
 
-        <p class="cover-event" *ngIf="item.EventTypeId == 4"><b><span>COVER</span></b>
-          <span class="approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
-          <span class="request-event" *ngIf="item.EventStatusId == 2">Request</span>
-          <span class="modal-denied-event" *ngIf="item.EventStatusId == 4">Request Denied</span>
-        </p>
+          <p class="cover-event" *ngIf="item.EventTypeId == 4"><b><span>COVER</span></b>
+            <span class="approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
+            <span class="request-event" *ngIf="item.EventStatusId == 2">Request</span>
+            <span class="modal-denied-event" *ngIf="item.EventStatusId == 4">Request Denied</span>
+          </p>
 
-        <p class="clock-event" *ngIf="item.EventTypeId == 6"><b><span>CLOCK</span></b>
-          <span class="approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
-          <span class="request-event" *ngIf="item.EventStatusId == 2">Request</span>
-          <span class="modal-denied-event" *ngIf="item.EventStatusId == 4">Request Denied</span>
-        </p>
+          <p class="clock-event" *ngIf="item.EventTypeId == 6"><b><span>CLOCK</span></b>
+            <span class="approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
+            <span class="request-event" *ngIf="item.EventStatusId == 2">Request</span>
+            <span class="modal-denied-event" *ngIf="item.EventStatusId == 4">Request Denied</span>
+          </p>
 
-        <p class="absent-event" *ngIf="item.EventTypeId == 7"><b><span>ABSENT</span></b>
-          <span class="approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
-          <span class="request-event" *ngIf="item.EventStatusId == 2">Request</span>
-          <span class="modal-denied-event" *ngIf="item.EventStatusId == 4">Request Denied</span>
-        </p>
-      </ion-col>
-    </ion-row>
-    <ion-col>
-    <ion-row>
-        <p><b>Start:</b> {{item.EventStart | date:'shortTime'}}</p>
-    </ion-row><br>
-    <ion-row>
-        <p><b>End:</b> {{item.EventEnd | date:'shortTime'}}</p>
-    </ion-row><br>
-    <ion-row>
-        <p><b>Position: </b>{{positionName}}</p>
-    </ion-row><br>
-    <ion-row>
-      <p style="float: right" *ngIf="item.BreakStart"><b>Lunch Break: </b> {{item.BreakStartTime | date: 'shortTime'}}</p>
-      <p style="float: right" *ngIf="!item.BreakStart "><b>Lunch Break: </b> (None listed)</p>
-    </ion-row><br>
-    <ion-row>
-        <p *ngIf="item.Notes != ''">
-          <b>Notes: </b>{{item.Notes}}
-            <button ion-button clear (click)="openNoteEdit(item.Notes, item.ScheduleEventId)" >
-            <ion-icon name="create" end></ion-icon>
-            </button>
-        </p>
-        <p *ngIf="item.Notes == ''">
-          <b>Notes:</b> (None)
-            <button ion-button clear (click)="openNoteEdit(item.Notes, item.ScheduleEventId)">
-            <ion-icon name="create" end></ion-icon>
-            </button>
-        </p>
-    </ion-row><br>
-    <br>
-    <button *ngIf="item.EventTypeId == 1" ion-button color="danger" (click)="onCoverRequestClick()">Request Cover</button>
-    </ion-col>
-  </ion-item>
+          <p class="absent-event" *ngIf="item.EventTypeId == 7"><b><span>ABSENT</span></b>
+            <span class="approved-event" *ngIf="item.EventStatusId == 1">Approved</span>
+            <span class="request-event" *ngIf="item.EventStatusId == 2">Request</span>
+            <span class="modal-denied-event" *ngIf="item.EventStatusId == 4">Request Denied</span>
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item (click)="openEventStartEdit()" detail-push>
+      <ion-label><b>Start:</b> {{item.EventStart | date:'shortTime'}}
+        <ion-icon md="md-arrow-forward" style="float: right"></ion-icon>
+      </ion-label>
+    </ion-item>
+    <ion-item (click)="openEventEndEdit()" detail-push>
+      <ion-label><b>End:</b> {{item.EventEnd | date:'shortTime'}}
+        <ion-icon md="md-arrow-forward" style="float: right"></ion-icon>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><b>Position: </b>{{positionName}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label *ngIf="item.BreakStart"><b>Lunch Break: </b> {{item.BreakStartTime | date: 'shortTime'}}</ion-label>
+      <ion-label *ngIf="!item.BreakStart "><b>Lunch Break: </b> (None listed)</ion-label>
+    </ion-item>
+    <ion-item (click)="openNoteEdit(item.Notes, item.ScheduleEventId)" detail-push>
+      <ion-label *ngIf="item.Notes != ''">
+        <b>Notes: </b>{{item.Notes}}
+        <ion-icon md="md-arrow-forward" style="float: right"></ion-icon>
+      </ion-label>
+      <ion-label *ngIf="item.Notes == ''">
+        <b>Notes:</b> (None)
+        <ion-icon md="md-arrow-forward" style="float: right"></ion-icon>
+      </ion-label>
+    </ion-item>
+    <ion-row></ion-row><br>
+    <button *ngIf="item.EventTypeId == 1" ion-button color="danger" (click)="onCoverRequestClick()">Request Cover
+    </button>
+  </ion-item-group>
 </ion-content>

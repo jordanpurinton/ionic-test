@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController, Loading } from 'ionic-angular';
+import { NavController} from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import {TabsPage} from "../tabs/tabs";
 import {UserService} from "../../providers/user-service";
@@ -17,8 +17,7 @@ export class LoginPage {
   constructor(private nav: NavController,
               private authService: AuthService,
                private userService: UserService,
-              private globalFunctions: GlobalFunctions) {
-  }
+              private globalFunctions: GlobalFunctions) {}
 
   ionViewDidEnter()
   {

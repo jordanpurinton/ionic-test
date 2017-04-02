@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {AlertController, LoadingController, Loading, NavController} from "ionic-angular";
+import {AlertController, LoadingController, Loading} from "ionic-angular";
 
 @Injectable()
 /**
@@ -7,6 +7,15 @@ import {AlertController, LoadingController, Loading, NavController} from "ionic-
  */
 export class GlobalFunctions {
   loading: Loading;
+  loadingText: string[] =
+    [
+      'Poking the matrix...',
+      'Beeping and booping...',
+      'Tweaking flux capacitor...',
+      'Pinging hyperdrive generator...',
+      'Calibrating mass relay...',
+      'Entering event horizon...'
+    ];
 
   constructor(private loadingCtrl: LoadingController, private alertController: AlertController,) {
   }
@@ -16,8 +25,10 @@ export class GlobalFunctions {
    */
   showLoading()
   {
+    let rand = Math.floor(Math.random() * 6);
+    console.log(rand)
     this.loading = this.loadingCtrl.create({
-      content: 'Just a sec...'
+      content: this.loadingText[rand]
     });
     this.loading.present();
   }

@@ -17,7 +17,7 @@ export class TabsPage {
   shiftRequestPage: any = ShiftRequestPage;
   settingsPage: any = SettingsPage;
   firstName: any = localStorage.getItem('FirstName');
-  constructor(private alertController: AlertController, public nav: NavController, public userService: UserService)
+  constructor(private alertController: AlertController, public nav: NavController)
   {
   }
 

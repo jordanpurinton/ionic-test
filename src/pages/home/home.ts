@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
-import {NavController, AlertController, ModalController} from 'ionic-angular';
-import { AuthService } from '../../providers/auth-service';
-import { LoginPage } from '../login/login';
+import {ModalController} from 'ionic-angular';
 import {UserService} from "../../providers/user-service";
 import { DatePicker } from 'ionic-native';
 import {EventModalPage} from "../event-modal/event-modal";
+import {GlobalFunctions} from "../../providers/global-functions";
 
 @Component({
   selector: 'page-home',
@@ -22,7 +21,9 @@ export class HomePage {
   hasNextEvent: boolean = true;
   positionName: any;
 
-  constructor(private userService: UserService, public modalControl: ModalController)
+  constructor(private userService: UserService,
+              public modalControl: ModalController,
+              private globalFunctions: GlobalFunctions)
   {
     this.getNextEvent();
     this.getDateEvent();
@@ -52,6 +53,9 @@ export class HomePage {
       .subscribe(
         data => {
           this.positionName = data;
+        },
+        err => {
+          console.log(err);
         }
       );
   }
@@ -64,15 +68,14 @@ export class HomePage {
   {
     this.userService.getDateEvent(this.dateTime)
       .subscribe(
-        data => { // success
+        data => { // successful date retrieval
           this.dateEvent = data;
           this.hasEvent = true;
           localStorage.setItem('PositionId', data[0].PositionId);
           this.getPositionName(localStorage.getItem("PositionId"));
           this.eventTypeId = data[0].EventTypeId;
-
         },
-        err => { // fail
+        err => { // unsuccessful date retrieval
           this.hasEvent = false;
           console.log(err);
         }
@@ -94,7 +97,7 @@ export class HomePage {
       },
       err => {
         this.hasNextEvent = false;
-        console.error(err);
+        console.log(err);
       }
     );
 
@@ -109,8 +112,12 @@ export class HomePage {
       date: new Date(),
       mode: 'date'
     }).then(
-      date => console.log('Got date: ', date),
-      err => console.log('Error occurred while getting date: ', err)
+      date => {
+        console.log('Got date: ', date)
+      },
+      err => {
+        console.log(err)
+      }
     );
   }
 
