@@ -19,7 +19,7 @@
       </button>
     </ion-col>
   </ion-row>
-  <ion-item id="date-pick-item" *ngIf="hasEvent">
+  <ion-card id="date-pick-item" *ngIf="hasEvent">
     <ion-buttons>
       <ion-item text-wrap *ngFor="let item of dateEvent" no-lines="true" (click)="showEventModal(item.EventStart)">
         <div>
@@ -62,30 +62,30 @@
           </ion-row>
           <ion-row>
             <ion-col col-9>
-              <p><b>Start: </b>{{item.EventStart | date: 'shortTime'}}</p>
-              <p><b>End: </b>{{item.EventEnd | date: 'shortTime'}}</p>
-              <p *ngIf="item.Notes != ''"><b>Notes:</b> {{item.Notes}}</p>
-              <p *ngIf="item.Notes == ''"><b>Notes:</b> (None)</p>
+              <h5 style="zoom: 150%"><b>Start: </b>{{item.EventStart | date: 'shortTime'}}</h5>
+              <h5 style="zoom: 150%"><b>End: </b>{{item.EventEnd | date: 'shortTime'}}</h5>
+              <h5 *ngIf="item.Notes != ''"><b>Notes:</b> {{item.Notes}}</h5>
+              <h5 *ngIf="item.Notes == ''"><b>Notes:</b> (None)</h5>
             </ion-col>
             <ion-col col-3>
               <button ion-button clear="true">
-                <ion-icon class="expand-arrow" name="arrow-dropright-circle" end></ion-icon>
+                <ion-icon class="expand-arrow" name="arrow-forward" end></ion-icon>
               </button>
             </ion-col>
           </ion-row>
         </div>
       </ion-item>
     </ion-buttons>
-  </ion-item>
-  <ion-item *ngIf="!hasEvent" text-wrap>
-    <p style="color: orangered">Looks like you don't have any events on <b>{{dateTime | date: 'MM/dd/yy'}}!</b>
+  </ion-card>
+  <ion-card *ngIf="!hasEvent" text-wrap>
+    <p style="color: orangered; zoom: 160%">Looks like you don't have any events on <b>{{dateTime | date: 'MM/dd/yy'}}!</b>
     </p>
-  </ion-item>
-  <ion-item id="next-event-item" *ngIf="hasNextEvent"><br>
+  </ion-card>
+  <ion-card id="next-event-item" *ngIf="hasNextEvent"><br>
+    <ion-buttons>
     <h6 text-center="true">YOUR NEXT EVENT IS ON:</h6>
     <ion-item text-wrap *ngFor="let item of nextEvent" no-lines="true" (click)="showEventModal(item.EventStart)">
       <h6 text-center="true"><b>{{item.EventStart | date:'MM/dd'}}</b></h6>
-      <ion-buttons>
         <br>
         <div>
           <ion-row id="next-grid">
@@ -127,22 +127,22 @@
           </ion-row>
           <ion-row>
             <ion-col col-9>
-              <p><b>Start: </b>{{item.EventStart | date: 'shortTime'}}</p>
-              <p><b>End: </b>{{item.EventEnd | date: 'shortTime'}}</p>
-              <p *ngIf="item.Notes != ''"><b>Notes:</b> {{item.Notes}}</p>
-              <p *ngIf="item.Notes == ''"><b>Notes:</b> (None)</p>
+              <h5 style="zoom: 150%"><b>Start: </b>{{item.EventStart | date: 'shortTime'}}</h5>
+              <h5 style="zoom: 150%"><b>End: </b>{{item.EventEnd | date: 'shortTime'}}</h5>
+              <h5 *ngIf="item.Notes != ''"><b>Notes:</b> {{item.Notes}}</h5>
+              <h5 *ngIf="item.Notes == ''"><b>Notes:</b> (None)</h5>
             </ion-col>
             <ion-col col-3>
               <button ion-button clear="true">
-                <ion-icon class="expand-arrow" name="arrow-dropright-circle" end></ion-icon>
+                <ion-icon class="expand-arrow" name="arrow-forward" end></ion-icon>
               </button>
             </ion-col>
           </ion-row>
         </div>
-      </ion-buttons>
     </ion-item>
-  </ion-item>
-  <ion-item *ngIf="!hasNextEvent" text-wrap>
-    <p style="color: orangered">Looks like you don't have any future events scheduled!</p>
-  </ion-item>
+    </ion-buttons>
+  </ion-card>
+  <ion-card *ngIf="!hasNextEvent" text-wrap>
+    <p style="color: orangered; zoom: 160%">Looks like you don't have any future events scheduled!</p>
+  </ion-card>
 </ion-content>

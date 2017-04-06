@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { NavController} from 'ionic-angular';
 import { AuthService } from '../../providers/auth-service';
 import {TabsPage} from "../tabs/tabs";
@@ -23,6 +23,7 @@ export class LoginPage {
   {
     localStorage.clear();
   }
+
 
   /**
    * Check user login information by making call to API.

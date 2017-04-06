@@ -181,7 +181,7 @@ export class EventModalPage {
   {
     let alert = this.alertControl.create({
       title: 'Optional',
-      message: 'Enter a message to send to admins with your cover request',
+      message: 'Enter a message to send to admins with your cover request.',
       inputs: [
         {
           name: 'Message',

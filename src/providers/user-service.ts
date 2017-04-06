@@ -45,7 +45,7 @@ export class UserService {
    * @returns {Observable<R>}
    */
   getDateEvent(dateTime) {
-    return this.http.get("http://localhost:56586/api/schedule-events/date-events/" + localStorage.getItem("EmployeeId") + "/" + encodeURIComponent(dateTime))
+    return this.http.get("http://localhost:56586/api/schedule-events/date-events/" + localStorage.getItem("EmployeeId") + "/" + dateTime)
       .map(
         response => response.json(),
         err => console.log(err))
@@ -66,8 +66,30 @@ export class UserService {
    * Return all schedule events for the next seven days for an employee.
    * @returns {Observable<R>}
    */
-  getWeekView() {
-    return this.http.get("http://localhost:56586/api/schedule-events/week-events/" + localStorage.getItem("EmployeeId"))
+  getWeekView(dateTime) {
+    return this.http.get("http://localhost:56586/api/schedule-events/current-week-events/" + localStorage.getItem("EmployeeId") + "/" + dateTime.toISOString())
+      .map(
+        response => response.json(),
+        err => console.log(err))
+  }
+
+  /**
+   * Return all schedule events for previous seven days before a given date for an employee.
+   * @returns {Observable<R>}
+   */
+  getPrevWeek(dateTime) {
+    return this.http.get("http://localhost:56586/api/schedule-events/last-week-events/" + localStorage.getItem("EmployeeId") + "/" + dateTime.toISOString())
+      .map(
+        response => response.json(),
+        err => console.log(err))
+  }
+
+  /**
+   * Return all schedule events for seven days past given date for an employee.
+   * @returns {Observable<R>}
+   */
+  getNextWeek(dateTime) {
+    return this.http.get("http://localhost:56586/api/schedule-events/next-week-events/" + localStorage.getItem("EmployeeId") + "/" + dateTime.toISOString())
       .map(
         response => response.json(),
         err => console.log(err))

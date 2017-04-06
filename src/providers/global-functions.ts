@@ -26,7 +26,6 @@ export class GlobalFunctions {
   showLoading()
   {
     let rand = Math.floor(Math.random() * 6);
-    console.log(rand)
     this.loading = this.loadingCtrl.create({
       content: this.loadingText[rand]
     });

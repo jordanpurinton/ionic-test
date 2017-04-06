@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {ModalController} from 'ionic-angular';
 import {UserService} from "../../providers/user-service";
 import { DatePicker } from 'ionic-native';
@@ -20,6 +20,7 @@ export class HomePage {
   hasEvent: boolean = true;
   hasNextEvent: boolean = true;
   positionName: any;
+
 
   constructor(private userService: UserService,
               public modalControl: ModalController,
